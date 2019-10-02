@@ -1,4 +1,7 @@
 
+library(tibble)
+library(ggplot2)
+
 ## Demo sentralgrenseteoremet
 
 # Tiltenkt brukt til å forklare/demonstrere sentralgrenseteoremet i undervisning.
