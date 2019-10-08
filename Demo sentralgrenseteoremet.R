@@ -13,7 +13,7 @@ library(ggplot2)
 terninger <- 5
 
 # Antall ganger terningene kastes
-repetisjoner <- 50000
+repetisjoner <- 5000
 
 # Lag en tom resultattabell
 resultat <- integer(0)
@@ -43,16 +43,16 @@ plot <- ggplot(data = tabell) +
                 limits = as.character(1:(6*terninger)),
                 breaks = as.character(terninger:(6*terninger)),
                 labels = as.character(terninger:(6*terninger))) +
-        scale_y_continuous(name = "Antall kast") +
+        scale_y_continuous(name = "Antall kast") #+
 # Legg til normalfordelingskurve
-        if(terninger > 1 & repetisjoner > 10){
-        stat_function( 
-                fun = function(x, mean, sd, n){ 
-                        dnorm(
-                                x = x,
-                                mean = mean(tabell$verdi),
-                                sd = sd(resultat)) * length(resultat)
-                }, 
-                args = c(mean = mean, sd = sd, n = n))
-        }
+      #  if(terninger > 1 & repetisjoner > 10){
+      #  stat_function( 
+      #          fun = function(x, mean, sd, n){ 
+      #                  dnorm(
+      #                          x = x,
+      #                          mean = mean(tabell$verdi),
+      #                          sd = sd(resultat)) * length(resultat)
+      #          }, 
+      #          args = c(mean = mean, sd = sd, n = n))
+      #  }
 print(plot)
