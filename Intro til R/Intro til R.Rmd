@@ -1,0 +1,666 @@
+---
+title: "Intro til R Script"
+output: html_document
+---
+
+# Intro til R for FALK
+
+```{r Laster pakker, message=FALSE, warning=FALSE}
+library(dplyr)
+library(tibble)
+library(tidyverse)
+library(haven)
+library(readxl)
+library(readr)
+library(psych)
+library(broom)
+library(ggplot2)
+library(ggstatsplot)
+```
+
+## Orientere seg i RStudio
+
+Her er RStudio. Du kan helt fint kjøre R uten RStudio, men jeg har aldri vært borti noen som gjør det. Det er bare å åpne R, ikke RStudio, og prøve, så skjønner dere hvorfor. Da har du kun ett enkelt vindu med command-line.
+
+I RStudio har du det samme vinduet, kalt Console. Det er der koden faktisk kjøres. Men i RStudio har du flere andre vinduer rundt, som bygger opp under og gjør Console-vinduet lettere å bruke. Vi skal ta en kjapp titt før vi begynner å taste.
+
+Dere kan selv velge hvilke vinduer dere vil ha hvor, venstre/høyre og oppe/nede. Det dere ser her er slik jeg foretrekker det. 
+Hvordan fungerer fargene? Ser dere skikkelig? Skal jeg bytte til noe lysere, med svart tekst? Selv synes jeg dette er mest behagelig.
+
+Her oppe til høyre har jeg Console. Det er her jeg faktisk kjører koden min. Alt jeg taster inn her, etterfulgt av Enter, blir kjørt som kode.
+
+Det er stort sett veldig upraktisk å kjøre all kode på den måten, live. Du blir veldig sårbar for skrivefeil, og det er vanskelig å holde oversikt over hvor du egentlig er. Derfor kan du heller skrive koden i forskjellige script-filer. Disse har jeg her, oppe til venstre. Da kan du flikke og flikke på koden, sette inn en linje innimellom her eller der, teste ulike ting, og så enten copy/paste enkeltlinjer eller source større deler til console når du vil kjøre den.
+
+Nede til høyre her har jeg forskjellige ting:
+En fil-manager, samme prinsippet til Finder på mac eller Explorer i Windows.
+En fane for plot eller all grafikk jeg produserer med koden min.
+En oversikt over pakker jeg har installert og lastet.
+En fane for hjelp-dokumentasjon. Denne bruker jeg ganske mye.
+
+Her nede til venstre har jeg mitt Environment. Hvis jeg forklarer det nå gir det ikke mening. Jeg skal forklare den senere, når det gir mening.
+
+I tillegg har jeg en oversikt over History, alle linjer med kode jeg har kjørt. Noen ganger, hvis du vil kjøre en linje om igjen som du kjørte nylig, så kan du bla deg bakover i History og dobbelklikke på den linja, så slipper du å taste den på nytt.
+
+## R som kalkulator
+
+Ok, vi skal opprette en scriptfil og jobbe med den snart. Men nå må vi få tasta litt, så vi får litt grunnleggende syntax inn i fingrene.
+
+På sitt mest grunnleggende oppfører R seg som en kalkulator. Formuler et matematisk uttrykk i console, og du får et svar på neste linje.
+
+```{r}
+1 + 1
+34 / 3
+45 * (13 - 54)
+```
+
+Legg merke til at før vært svar står det et ettall, i firkantklammer. Med disse eksemplene får vi ett element til svar hver gang. Elementet "2", f.eks. Ettallet viser at 2 er det første elementet i svaret vårt. Hvis vi hadde fått en lang remse over flere linjer i svar, så står det et slikt tall i firkantklemmer for hver linje, som angir hvilket element det første på den linja er.
+
+## Assigne objekter
+
+Vi kan gi innhold til objekter, som vi assigner. Et slik objekt har et navn og navnet kan være enten bare en bokstav eller et lengre ord.
+
+For eksempel kan jeg definere et objekt jeg kaller x, og assigne det den numeriske verdien 1.
+
+I R brukes en pil som assignment operator: <- 
+
+```{r}
+x <- 1
+x
+y <- 2
+y
+x + y
+z <- x + y
+z
+z <- x / y
+z
+z <- y^y
+z
+```
+
+Dette er et bedre tidspunkt å forklare Environment på. Environmentet ditt utgjøres av den samlingen av objekter som til enhver tid eksisterer i minnet. Altså objekter du har assignet. Akkurat nå inneholder mitt environment tre objekter: x, y og z. Hvis du assigner noe til et objektnavn du allerede har definert, så overskrives det gamle innholdet.
+
+Du kan også fjerne objekter fra Environment. Det tar jeg etterpå.
+
+## Ulike datatyper, vektorer og subsetting
+
+Kommandoen c() "concatenate" brukes til å koble sammen enkeltelementer til vektorer, i ett objekt. Når det først er gjort kan du jobbe videre med vektoren som ett enkeltobjekt. Alle regneoperasjoner du gjør med en vektor utføres med hvert enkelt ledd i vektoren separat. Du kan også benytte c() til å hekte vektorer på hverandre, til en lengre vektor.
+
+```{r}
+x <- c(5, 2, 3, 5, 2, 4, 4, 2)
+x
+length(x)
+class(x)
+x + 10
+x * 10
+x + 1000
+
+y <- rep(c(10, 200), times = 4)
+y
+
+# Hvis vi utfører en operasjon med to vektorer av lik lengde utføres operasjonen med hhv første ledd i begge vektorene, andre ledd i begge vektorene etc. etc.
+
+z <- x + y
+z
+
+# Eller, x og y ligger fremdeles slik de lå, uendret. Så jeg kan bruke de på nytt til å definere z på en annen måte.
+
+z <- c(x, y)
+z
+
+# Når man definerer et objekt, så kan man henvise til objektet slik det er allerede når du definerer hvordan det skal bli:
+
+z <- z + 1
+z
+
+z <- 2*z
+z
+
+```
+
+Et objekt, enten det er en vektor eller én verdi, trenger ikke være et tall. Den kan også være logisk, eller tekst. Først tekst:
+
+```{r}
+# w <- c(blue, green, red, yellow)
+
+# Dette blir feil, fordi når vi skriver navn på denne måten så tror R at "blue" og "green" etc. er objekter, som vi refererer til. Vi må bruke gåseøyne på ting som skal lagres som tekststring:
+
+w <- c("blue", "green", "red", "yellow")
+w
+length(w)
+class(w)
+```
+
+Vi bruker firkantklammer bak objektet til subsetting, altså til å gjøre utdrag eller velge elementer fra en vektor.
+
+```{r}
+# Første element i z
+z[1]
+
+# Andre element i z
+z[2]
+
+# Første og tredje element i z
+# z[1, 3]
+
+# Kan noen gjette hvorfor dette ble feil?
+# Et komma inni firkantklammene angir dimensjonene i en tabell. Rader før kommaet, og kolonner etter. Men nå har vi ikke en tabell, bare en vektor. Da blir det feil. Skal vi hente ut første og tredje element må vi gjøre det på denne måten:
+z[c(1, 3)]
+
+# Første til tredje element i z
+z[1:3]
+
+# Men når vi vil ha første til tredje OG sjette, så må vi bruke c() igjen.
+z[c(1:3,6)]
+
+# Minus kan brukes til å angi "ikke". Altså, alle elementer untatt det andre:
+z[-2]
+
+# Jeg viste hvordan du kan subsette etter elementers plassering i vektoren. Man du kan også subsette etter elementets verdi.
+
+z[z < 10]
+
+z[z > 20]
+
+
+#I R brukes "dobbelt-er-lik-tegn" til å angi den logiske operatoren "er lik".
+z[z == 22]
+
+# Merk at nå ber jeg om å få returnert de elementene i z som er lik 22. Da får jeg tilbake fire tilfeller av 22, men ingen info om hvor i z de sto. Istedet kan jeg si til R at z = 22, og jeg får tilbake de tilfellene der dette er sant og de tilfellene der det ikke er sant:
+
+z == 22
+
+# Jeg kan også assigne dette resultatet til et eget objekt. Da får jeg en ny vektor, q, som ikke er numerisk men logisk. 
+
+q <- z == 22
+q
+length(q)
+class(q)
+
+# Eller, hvis jeg lurte på hvilke elementer i z som var 22, kan jeg bruke:
+
+which(z == 22)
+
+which(q)
+
+# Det funksjonen which() gjør er at den returnerer plasseringen på de tilfellene der et logisk utsagn er sant. z == 22 er et slikt utsagn, så du kan fore which() med det. Men q er også et slikt utsagn, så det funker også.
+
+# Dette fungerer med tekstvektorer også:
+
+w <- rep(w, times = 50)
+w
+
+which(w == "green")
+which(w == "blue")
+
+# I tillegg kan jeg bruke anledningen til å vise frem funksjonen sort()
+
+sort(w)
+sort(w, decreasing = TRUE)
+
+# Merk at jeg ikke har endret på w nå. Fargene ligger fremdeles i den opprinnelige rekkefølgen. Jeg har bare bedt om å få dem fremvist sortert. Derimot, hvis jeg gjør slik:
+
+w <- sort(w)
+
+# ...så blir den sånn.
+
+w
+
+# Samme med tall:
+
+sort(z)
+
+```
+
+## Tabelldata
+
+Vektorer av samme lengde kan samles i tabeller, og utgjøre datasett. Det finnes ulike lagringsformater for slike tabeller, f.eks. matrix eller data.table. Jeg kommer til å fokusere på en type som heter tibble, pga kompatibilitet med en del funksjoner vi bruker senere.
+
+```{r}
+# Alle funksjoner i R har et navn etterfulgt av en parantes. Dere har brukt et par funksjoner allerede, nemlig sort(), which(), rep(), length() og class().
+# tibble() er også en funksjon. Det tibble gjør er at den lagrer data for oss i et spesielt tabellformat kalt en tibble. Inni parantesen til en funksjon kommer argumentene man forer funksjonen med. F.eks. når vi brukte funksjonen rep() så anga vi hvor mange ganger vi ønsket å repetere med argumentet times. Og i sort() fantes et argument som het decreasing og som kunne angis til TRUE eller FALSE. I tilfellet tibble() er argumentene de kolonnene man ønsker skal utgjøre tabellen, angitt på formatet navn på kolonnen = verdier inni c() eller som et uttrykk. Mellom angivelsen av hver kolonne bruker man komma.
+
+# Et enkelt eksempel:
+
+data <- tibble(time = c(45, 40, 42, 47, 43), speed = c(34, 36, 32, 34, 23))
+
+# Nå har jeg objektet "data" i mitt Environment. Vi kan titte på det:
+
+data
+
+# Dette er en vrien måte å gjøre det på. Hvis vi har vektorer liggende i environment fra før kan vi bruke de, ved å oppgi navnet på dem.
+
+time <- c(45, 40, 42, 47, 43)
+speed <- c(34, 36, 32, 34, 23)
+
+data2 <- tibble(
+        tid = time,
+        fart = speed,
+
+# Man kan også definere kolonner som matematiske uttrykk, og man kan referere til tidligere kolonner når man oppretter nye
+        
+        distanse = tid * fart
+)
+
+# Hvis man har en tibble som allerede er opprettet, og ønsker å legge til en ny kolonne matematisk, bruker man funksjonen mutate(). Det første argumentet mutate() tar er navnet på objektet/tabellen/tibblen du skal bruke. Det andre argumentet og utover, er de nye kolonnene, på samme syntax som når du oppretter tibble.
+
+data3 <- mutate(data,
+                  distance = speed * time)
+```
+
+Vi kan subsette tabelldata på samme måte som med vektorer, med firkantklammer. Husk at dere da må ha et komma inni firkantklammene, og at rader kommer først og kolonner etter
+
+```{r}
+
+# Første rad:
+data2[1,]
+
+# Første kolonne:
+data2[,1]
+
+# Første og tredje kolonne:
+data2[,c(1,3)]
+
+# Alle kolonner utenom den første:
+data2[,-1]
+
+# Når vi jobber med tabelldata kan vi også subsette på en annen måte. Vi kan bruke dollartegn til å hente enkeltkolonner, eller variabler, som en vektor. Da kommer navnet på objektet før dollartegnet og variabelnavnet etter:
+
+data2$tid
+
+data2$distanse
+
+```
+
+## Finne hjelp
+
+Nå kommer et bra triks: Hvis dere lurer på hva en funksjon gjør, og hvilke argumenter akkurat den funksjonen kan ta imot og hva som er default, så kan dere skrive navnet på funksjonen med et spørsmåltegn foran
+
+```{r}
+
+?mutate
+?rep
+?which
+?sort
+
+```
+
+## Slette alt i Environment og sette Working Directory
+
+mutate() er en supernyttig funksjon. Typisk bruk er f.eks. til summescorer på testverktøy. Det finnes mange andre funksjoner også, som er nyttige til "datamassasje", før man begynner med analyser. Og det vi har lært til nå kan kombineres. Du kan f.eks. regne ut en ny variabel basert på to eller flere andre, men kun i de bestemte tilfellene hvor gitte forutsetninger er tilstede, som f.eks. kun der en verdi i en variabel er under eller over en gitt verdi.
+
+Men vi skal videre. Å sitte og taste inn data manuelt med tibble() er ikke noe særlig effektivt. Derfor tenkte jeg at vi kunne importere data også.
+
+Og herfra og ut skal vi bygge et script som vi tar vare på. Så dette er et godt tidspunkt å opprette en ny fil på, og nullstille Environment. Da må vi sjekke at vi jobber på riktig sted på PCen vår, altså i riktig mappe. Alltid når vi henviser til filer vi skal importere i R-koden vår, så tenker jo R at vi befinner oss et spesielt sted i filstrukturen, kalt Working Directory. Vi kan sjekke hva som er vår working directory akkurat nå ved å skrive getwd().
+
+```{r}
+
+getwd()
+
+#Ikke? Da bruker dere Fil-explorern til å bla dere frem til mappa dere skal jobbe i. Så trykker dere på tannhjulet, "More", og velger "Set Working Directory". Det resulterer i en linje kode i console. Å taste den linja manuelt hadde gjort samme jobben som å klikke på Set Working Directory. Har dere workshop-mappa som working directory nå? Det må dere. Og så har dere en mappe som heter data i deres Working Directory.
+
+getwd()
+
+# Så kan jeg vise hvordan man sletter objekter man har lagret i environment. Det gjør du med kommandoen rm(). Så kan du liste opp én eller flere objekter du vil slette.
+
+rm(x)
+
+#Er det flere adskiller du med komma:
+
+rm(speed, time)
+
+# Du kan også slette alle objekter i environment samtidig, med kommandoen:
+
+rm(list = ls())
+
+```
+
+(PAUSE) 50 min. hit, inkl. Keynote.
+
+# Starte nytt prosjekt i RMarkdown
+
+Da har vi et tomt Environment, og riktig Working Directory, så da kan vi begynne på et nytt prosjekt.
+
+Da velger dere File, New File, RMarkdown.
+
+Gi den en tittel. Dette kan du lett endre etterpå. Bare la type stå til HTML.
+
+Lagre det en gang. Sjekk at det blir lagret i workshop-mappa. Gi det et navn.
+
+Med RMarkdown samles kode i chunks, sånn som disse. Alt inni en slik chunk kjøres som kode. Alt mellom chunks behandles som tekst. Hvis dere ser på RMarkdown-sidene i folderen dere har fått så ser dere hvordan man angir overskrifter, f.eks.
+
+Så bare for å vise frem mulighetene litt kan vi lage en overskrift her, # Workshop: Intro til R. Og så kan vi jo lage en mindre overskrift her, ## Import av data. Og så kan vi skrive et par setninger. Når vi er ferdige i dag skal vi ta en titt på hvordan dette dokumentet ser ut når vi strikker en HTML-fil av det.
+
+Til å importere data skal vi bruke funksjoner fra et par forskjellige pakker, så først må vi laste disse, slik at de er aktive:
+
+```{r}
+library(haven)
+library(readr)
+library(readxl)
+
+library(dplyr)
+```
+
+Vi kan importere data fra hvilken som helst kilde. Fra Excel, fra CSVer, fra ren tekst, fra SPSS-filer. Hva som helst. I dette tilfellet skal vi importere data fra en SPSS-fil. Den funksjonaliteten ligger ikke i R i utgangspunktet, men den mest brukte pakken som gir oss denne funksjonaliteten heter Haven. I tillegg til SPSS-filer gir haven mulighet til å importere og eksportere data fra Stata og SAS, hvis noen skulle trenge det.
+
+```{r message=FALSE, warning=FALSE}
+
+# Lese inn seleksjonsdata.sav.
+# Vi kan jo starte med å sjekke hjelpfila for denne kommandoen:
+
+?read_spss
+
+# Ser ganske straightforward ut. Spoiler alert: Det er det.
+
+read_spss("data/seleksjonsdata.sav")
+
+# Hvor ble det av disse dataene nå?
+# Ingensteder. Det er litt av greia med R, som vi allerede har sett litt av. Du må være veldig presis i hva du spør om. R gjør ikke det du ønsker at R skal gjøre. R gjør nøyaktig det du ber R om å gjøre. I dette tilfellet har vi glemt å assigne disse dataene til et objekt når vi leste dem inn. Da leses de inn, vi får en preview på skjermen, men dataene eksisterer ingensteder etterpå. Det blir litt som om du spør R om den vet hva klokka er, og R svarer "ja".
+
+# Vi prøver igjen:
+
+seleksjonsdata <- read_spss("data/seleksjonsdata.sav")
+
+# Vi kan også lese fra andre dataformater, som Excel og CSV:
+
+prestasjonsdataKS <- read_xlsx("data/Prestasjonsdata Krigsskolen.xlsx")
+
+prestasjonsdataSKSK <- read_xlsx("data/Karakterer og SML SKSK.xlsx")
+
+prestasjonsdataLKS <- read_csv2("data/LuftKS karakterer.csv")
+
+```
+
+## Koble datasett
+
+De tre datasettene vi nå har, som inneholder prestasjonsdata, har alle den samme ID-kolonnen, men inneholder jo ikke noen av de samme verdiene for ID, siden ingen kadetter har gått på både f.eks. Krigsskolen og Sjøkrigsskolen. Disse tre datasettene kan vi altså stable oppå hverandre, uten noe mer om og men. Til det skal vi bruke funksjonen bind_rows(). Den funksjonen er en del av dplyr-pakka, som vi allerede har lastet inn. Samtidig, hvis vi åpner RStudio fra scratch en annen gang, og kjører dette scriptet, så vil ikke dplyr være lastet. Så for ryddighetsskyld kan vi føye dplyr til lista over pakker vi laster i begynnelsen. :
+
+```{r}
+
+prestasjonsdata <- bind_rows(prestasjonsdataKS, prestasjonsdataLKS)
+prestasjonsdata <- bind_rows(prestasjonsdata, prestasjonsdataSKSK)
+
+# For ryddighetsskyld:
+rm(prestasjonsdataKS, prestasjonsdataLKS, prestasjonsdataSKSK)
+
+#Vi kan bruke filtering joins til å filtrere ett datasett mot et annet. Dette er nyttig før man kobler to datasett for å sjekke hva som VIL bli koblet, og hva som IKKE vil bli koblet:
+
+semi_join(seleksjonsdata, prestasjonsdata, by = "ID")
+
+anti_join(seleksjonsdata, prestasjonsdata, by = "ID")
+
+# Til slutt kan vi bruke en av mutating joinsene til å faktisk koble de to datasettene. Det finnes flere forskjellige, men i 90% av tilfellene vil left_join gjøre jobben:
+
+data <- left_join(seleksjonsdata, prestasjonsdata, by = "ID")
+
+# Og igjen, for ryddighets skyld:
+
+rm(prestasjonsdata, seleksjonsdata)
+
+# Ok, da titter vi på datasettet vi har satt sammen:
+
+data
+
+```
+
+## Utforske data
+
+Ok, nå har vi ett objekt i environment, som innholder alle dataene våre, ferdig koblet. Jeg gjentar at dette er fiktive og simulerte data som jeg bruker til øvelser her på skolen, men jeg setter allikevel pris på om de ikke spres, for de kan fort oppfattes som reelle data hvis de havner hos noen utenforstående, uten kontekst.
+
+Nå skal vi i første omgang titte på noen forskjellige måter å titte på dataene våre på. Hvis man er vant til SPSS kan man jo lure på hvor dataene egentlig vises. Og da synes man det er lite tilfredsstillende å se at det står "400 obs. of 9 variables" nede i environment view.
+
+```{r}
+# Det første vi kan gjøre er å bare taste navnet på objektet i console.
+
+data
+
+# Da får du de første ti radene. Hvis det er mange variabler får du bare de første, og resten listet opp med kolonneoverskrifter.
+
+# Hvis du vil se alle dataene kan du bruke view()-kommandoen. Da får du rett og slett se alle dataene, SPSS-style:
+
+view(data)
+
+# Dette føles trygt, men det er jo faktisk ikke alltid så nyttig. Spesielt med veldig store datasett. Det finnes imidlertid en rekke andre triks. Jeg skal dra bare noen få av dem:
+
+# Man kan bruke str(), som visstnok står for structure, til å få mer detaljer om hvordan datasettet er bygget opp:
+
+str(data)
+
+# Man kan vise de n første eller n siste observasjonene med hhv head() og tail() funksjonene. Default n er seks, så hvis man ikke angir noe annet får man dette.
+
+head(data)
+
+tail(data)
+
+#Men du kan angi et eget tall:
+
+head(data, n = 20)
+tail(data, n = 20)
+
+# Tror maks fremdeles er 20, though.
+
+# Enda mer nyttig er kanskje funksjonen summary(). Det gir også litt info om sentral tendens om spredning på hver variabel:
+
+summary(data)
+
+#Som dere ser gir ikke summary noe fornuftig output på Gender og SKole nå, fordi de to variablene er tekstvektorer, etter at vi importerte filene fra Excel og SPSS. Eller strengt tatt er de numeriske, med tekstlabels. Vi kan gjøre om disse til datatypen faktor med funksjonen as.factor(). For senere analyser er det en fordel at R vet at dette ikke bare er en samling tekststrings, men en variabel på nominalnivå. Vi omdefinerer derfor de to variablene til faktorer:
+
+# Og det kan vi gjøre lengre opp i workflowen vår, f.eks. rett etter at dataene er koblet:
+
+data$Gender <- as_factor(data$Gender)
+data$Skole <- as_factor(data$Skole)
+
+data
+
+# Nå får vi i det minste n på de ulike alternativene.
+
+# names() gir deg en liste over variabelnavn. Dette virker trivielt, men kan være veldig nyttig i datasett med veldig mange variabler:
+
+names(data)
+
+# Funksjonen describe() er også veldig fin. Den er ikke en del av base R, men ligger i pakken psych.
+
+#install.packages("psych")
+#library(psych)
+
+describe(data)
+
+# Her får dere en masse deskriptiv statistikk i et oversiktelig tabellformat.
+
+# I samme pakke ligger en annen funksjon som er fin å bruke til å få en oversikt over data. Denne heter pairs.panels, og gir deg en korrelasjonsmatrise der koeffisientene står over diagonalen, scatterplot tegnes under diagonalen, og histogram tegnes på diagonalen.
+
+pairs.panels(data)
+
+# Dette er alle variablene i data. Og som dere ser tar den ikke hensyn til om data er på nominal eller ordinal nivå. Men vi kan selvsagt subsette for å plukke ut de variablene vi ønsker å inkludere.
+
+pairs.panels(data[,-c(1, 2, 7)])
+
+# Nå bruker vi fremdeles bare defaultene for funksjonen. VI kan sjekke hjelpfila for å se hvilke muligheter vi har:
+
+?pairs.panels
+
+# Og så bruker vi dette til å gjøre om innstillingene for plottet slik vi vil ha det. For eksempel:
+
+pairs.panels(data[,-c(1, 2, 7)], density = FALSE, lm = TRUE, ellipses = FALSE, jiggle = TRUE, hist.col = "green")
+
+```
+
+## Plotting
+
+En annen måte å titte på dataene på er selvsagt å plotte dem. Til plotting skal vi bruke en pakke som heter ggplot2, som er et helt utrolig kraftig og fleksibelt verktøy. Dere kommer aldri mer til å ønske å inkludere et plott fra SPSS i en artikkel igjen, hvis dere fikser ggplot.
+
+```{r}
+
+# Funksjonen ggplot tar følgende argumenter: Vi starter med å angi hvilket datasett vi bruker. Som neste argument bruker vi aes()-funksjonen (for aesthetics) til å angi hvilken variabel vi ønsker på hvilken akse. Til slutt velger vi et geom, som bestemmer utseendet på plottet:
+
+plot1 <- ggplot(data, aes(x = Skolepoeng)) +
+        geom_histogram()
+plot1
+
+# Hvis vi ikke hadde brukt histogram, men et annen geom, så hadde vi fått et annet plot:
+
+plot2 <- ggplot(data, aes(x = Skolepoeng)) +
+        geom_density()
+plot2
+
+# Så kommer et triks. Hvis vi angir flere argumenter i aes(), så kan vi trekke inn flere variabler:
+
+plot3 <- ggplot(data, aes(x = Skolepoeng, colour = Gender)) +
+        geom_density()
+plot3
+
+# Eller:
+
+plot4 <- ggplot(data, aes(x = Skolepoeng, colour = Skole)) +
+        geom_density()
+plot4
+
+# Til nå ser dere at jeg bare har brukt default innstillinger på geomene. Har ikke gitt dem noen argumenter overhodet. Men det er nær sagt uendelig med muligheter. SOm et enkelt eksempel kan jeg bytte colour med fill, og velge hvor gjennomsiktig fyllet skal være:
+
+plot5 <- ggplot(data, aes(x = Hovedkarakter, fill = Skole)) +
+        geom_density(alpha = .5)
+plot5
+
+# Det finnes geomer for virkelig alt mulig. F.eks. boxplot:
+
+plot6 <- ggplot(data, aes(x = Skole, y = Skolepoeng, fill = Skole)) +
+        geom_boxplot()
+plot6
+
+# Og vi kan ta i bruk y-aksen til en annen variabel også, f.eks. med point-geomet:
+
+plot7 <- ggplot(data, aes(x = Skolepoeng, y = Hovedkarakter)) +
+        geom_point()
+plot7
+
+# Vi kan kombinere flere geoms, for å bygge plottet vårt lag på lag. F.eks. kan vi kombinere point-geomet, med en som heter geom_smooth(), som gir oss forskjellige former for best fit-linje. Vi kan starte med med lineær regresjonslinje.
+
+plot8 <- ggplot(data, aes(x = Skolepoeng, y = Hovedkarakter)) +
+        geom_point() +
+        geom_smooth(method = "lm")
+plot8
+
+# Det finnes mange andre også. Bare sjekk mulige argumenter i hjelp-fila til geom_smooth, hvilke muligheter under method du har. F.eks. en loess-linje:
+
+plot9 <- ggplot(data, aes(x = Skolepoeng, y = Hovedkarakter)) +
+        geom_point() +
+        geom_smooth(method = "loess")
+plot9
+
+# Men la oss beholde den lineære, men heller legge på en variabel på farge igjen:
+
+plot10 <- ggplot(data, aes(x = Skolepoeng, y = Hovedkarakter, colour = Skole)) +
+        geom_point() +
+        geom_smooth(method = "lm")
+plot10
+
+
+```
+
+Dette var ment som en smakebit på ggplot. Og jeg har knapt touchet innpå mulighetene til å definere absolutt alt på disse plottene. Egne farger, konfidensintervall av eller på, hvor stort, definere labels, tittel, tykkelser på linjer etc. etc. Her er det bare å utforske hjelp-filene, eller google etter det du lurer på. Det finnes et tonn av ulike tutorials på hvordan man gjør alt mulig med ggplot, det er bare å søke dem opp.
+
+Det finnes også en del pakker som bygger videre på ggplot. De tar enkle argumenter og gir dem videre til ggplot for å lage en del spesialplot, som f.eks, interaksjonsplot eller Johnson-Neyman plot.
+
+Eller pakken ggstatsplot, som også baserer seg på ggplot. Den gir deg plot som også inkluderer statistikken:
+
+https://indrajeetpatil.github.io/ggstatsplot/
+
+```{r}
+
+ggscatterstats(data = data, x = Skolepoeng, y = Hovedkarakter)
+
+```
+
+# Korrelasjonsmatrise
+
+Denne hopper vi over, men fin å ha i bakhånd.
+
+```{r eval=FALSE, include=FALSE}
+corstarsl <- function(x){ 
+require(Hmisc) 
+x <- as.matrix(x) 
+R <- rcorr(x)$r 
+p <- rcorr(x)$P 
+
+## define notions for significance levels; spacing is important.
+mystars <- ifelse(p < .001, "***", ifelse(p < .01, "** ", ifelse(p < .05, "* ", " ")))
+
+## trunctuate the matrix that holds the correlations to two decimal
+R <- format(round(cbind(rep(-1.11, ncol(x)), R), 2))[,-1] 
+
+## build a new matrix that includes the correlations with their apropriate stars 
+Rnew <- matrix(paste(R, mystars, sep=""), ncol=ncol(x)) 
+diag(Rnew) <- paste(diag(R), " ", sep="") 
+rownames(Rnew) <- colnames(x) 
+colnames(Rnew) <- paste(colnames(x), "", sep="") 
+
+## remove upper triangle
+Rnew <- as.matrix(Rnew)
+Rnew[upper.tri(Rnew, diag = TRUE)] <- ""
+Rnew <- as.data.frame(Rnew) 
+
+## remove last column and return the matrix (which is now a data frame)
+Rnew <- cbind(Rnew[1:length(Rnew)-1])
+return(Rnew) 
+} 
+##Create table _insert your dataframe below
+New_table<-corstarsl(data[,-c(1,2,7)])
+
+New_table
+```
+
+## lineære modeller / regresjoner
+
+Til slutt hadde jeg tenkt å vise dere hvordan helt ordinære regresjoner virker i R. Dette er en intro til R, ikke til statisikk, men dette gir oss en mulighet til å teste regresjonssyntax for R, og den er normalt lik på tvers av pakker. Bl.a. bruker de mest brukte multilevelpakkene til R, lme4 og brms, en utvidet variant av samme syntax for å definere modeller:
+
+Syntaxen er "avhengig variabel ~ uavhengig variabel + uavhengig variabel + ... "
+
+Så for funksjonen lm() blir modellen første argument og datasettet andre argument.
+
+```{r}
+
+model1 <- lm(Hovedkarakter ~ Skolepoeng + AE, data = data)
+summary(model1)
+tidy(model1)
+
+model2 <- lm(Hovedkarakter ~ Skolepoeng + AE + Tj_snitt, data = data)
+summary(model2)
+
+model3 <- lm(Hovedkarakter ~ Skolepoeng + AE + Tj_snitt + BS_karakter, data = data)
+summary(model3)
+
+anova(model1, model2, model3)
+```
+
+## Pakker det er verdt å nevne
+
+MBESS - Har flere nyttige funksjoner, bl.a. for å beregne reliabilitet og for å beregne konfidensintervaller på effektstørrelser
+
+https://www3.nd.edu/~kkelley/site/MBESS.html
+
+Psych - Har vi allerede tittet litt på, med funksjonen pairs.panels(), men inneholder svært mange andre nyttige funksjoner også, bl.a. en hel haug med forskjellige reliabilitetsmål, og en rekke statistiske tester.
+
+http://personality-project.org/r/psych/
+
+Interactions. Ganske nytt tilskudd, kom nå i vår. Lettbrukt verktøykasse for interaksjoner. Anbefales!
+
+https://interactions.jacob-long.com/index.html
+
+metafor - Har ikke brukt denne selv, men jeg har fått med meg at det er en av de mest brukte metaanalysepakkene til R
+
+http://www.metafor-project.org/doku.php
+
+lme4 - En av flere multilevelpakker til R, men kanskje den nyeste og beste.
+
+https://github.com/lme4/lme4/
+
+Lavaan - LAtent VAriable ANalysis
+
+SEM-pakke for R
+
+http://lavaan.ugent.be
+
+Swirl - Lær deg R, i R. Denne er genial. Det blir litt som å spille et spill.
+
+likert
+
+

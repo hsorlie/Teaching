@@ -1,0 +1,283 @@
+---
+title: "Workshop: Intro til R 9.9. på FHS"
+author: "Henrik Sørlie"
+date: "9/9/2019"
+output: 
+  html_document: 
+    toc: yes
+---
+
+Hei, og takk til alle for at dere deltok på denne workshopen. Tross litt teknisk ball håper jeg dere satt igjen med i alle fall et lite innblikk i hvordan man kan jobbe med R. Som avtalt kommer her min utgave av det dokumentet vi jobbet med, ispedd litt annen informasjon jeg lovet å sende.
+
+# Ressurser og hjelp
+
+Her er lista over de viktigste ressursene jeg nevnte.
+
+## Bøker
+
+### R for Data Science
+
+<https://r4ds.had.co.nz>
+
+### YaRrr! The Pirate’s Guide to R
+
+<https://bookdown.org/ndphillips/YaRrr/>
+
+### Learning Statistics with R
+
+<https://learningstatisticswithr.com>
+
+## Anbefalte pakker
+
+Under følger et utvalg nyttige pakker. Lenker til dokumentasjon ligger under hver pakke, men husk at for å ta i bruk en pakke trenger du bare å skrive f.eks. `install.packages("MBESS")` og deretter `library(MBESS)` i console.
+
+### MBESS
+
+Har flere nyttige funksjoner, bl.a. for å beregne reliabilitet og for å beregne konfidensintervaller på effektstørrelser.
+
+<https://www3.nd.edu/~kkelley/site/MBESS.html>
+
+### psych
+
+Har vi allerede tittet litt på, med funksjonen pairs.panels(), men inneholder svært mange andre nyttige funksjoner også, bl.a. en hel haug med forskjellige reliabilitetsmål, og en rekke statistiske tester.
+
+<http://personality-project.org/r/psych/>
+
+### interactions
+
+Ganske nytt tilskudd, kom nå i vår. Lettbrukt verktøykasse for interaksjoner. Anbefales!
+
+<https://interactions.jacob-long.com/index.html>
+
+### metafor
+
+Heg har ikke brukt denne selv, men jeg har fått med meg at det er en av de mest brukte metaanalysepakkene til R.
+
+<http://www.metafor-project.org/doku.php>
+
+### lme4
+
+En av flere multilevelpakker til R, men kanskje den nyeste og beste. Bruker, og bygger videre på, standard "regresjons/modellerings-syntax" for R.
+
+<https://github.com/lme4/lme4/>
+
+### lavaan
+
+LAtent VAriable ANalysis. SEM-pakke for R
+
+<http://lavaan.ugent.be>
+
+### swirl
+
+Lær deg R, i R. Denne er genial. Det blir litt som å spille et spill.
+
+<https://swirlstats.com>
+
+### likert
+
+Verktøykasse og visualisering for likert-skalaer.
+
+<https://github.com/jbryer/likert>
+
+### papaja
+
+Pakke for å R-pakke produsere APA-style artikler med RMarkdown. Denne er ikke tilgjengelig via CRAN ennå fordi den er under utvikling. Instruksjoner for nedlasting finnes imidlertid på linken under.
+
+<https://crsh.github.io/papaja_man/>
+
+## Diskusjonsforum
+
+### Stack Overflow
+
+Diskusjonsforum for programmering, statistikk, R, etc.
+
+<https://stackoverflow.com>
+
+### Cross Validated
+
+Diskusjonsforum for statistikkspørsmål
+
+<https://stats.stackexchange.com>
+
+## Twitter
+
+Bruk hashtaggen #rstats for spredning.
+Det kan være verdt å følge:
+@hadleywickham @rstudiotips @rstudio @lakens @dataandme @dsquintana @paulbuerkner @rlmcelreath @djnavarro @f2harrell @annemscheel @OrbenAmy @ProfAndyField @bmwiernik @simplystats @mcmc_stan @NeilLewisJr @FrederikAust @DTWillingham @jamesheathers @HarryDCrane @DrMowinckels @dantonnoriega @EJWagenmakers @richarddmorey @edgarmerkle @BrianNosek @OSFramework @SanneCSmid @page_gould @Space_Mog @psignificant @StatModeling @ikschneider @avehtari @jamovistats @JASPStats @siminevazire @JohnSakaluk @tcarpenter216 @Liza_Bolton @bcaffo @NSSDeviations @rdpeng @jtleek @AndrewFHayes @SachaEpskamp @BayesianSpecs @xieyihui @LisaDeBruine @timminglab @BodoWinter @StatStas @dmi3k @peder_isager @RLadiesOslo @MaartenvSmeden @rabaath @FrederikAust @thomasp85 @jonaslindeloev @jazzystats
+
+Som sagt er dette en god miks av IOpsykologifolk, R-folk og statistikk/metodefolk.
+
+# Arbeidsflyt fra workshopen
+
+Her kommer det vi gjorde med datafilene jeg sendte ut på forhånd. Jeg har lagt inn litt ekstra kommentarer underveis, og litt flere argumenter i en del av funksjonene, for å vise ytterligere muligheter. Først laster vi inn de pakkene vi trenger:
+
+```{r message=FALSE, warning=FALSE}
+
+# Alt tekst etter en firkant (#) kjøres ikke som kode. Dette er nyttig for å kommentere koden inne i en chunk.
+
+# I denne chunken aktiveres pakkene som trengs for å kjøre dette skriptet. Merk at for denne chunken er argumentene satt til message=FALSE og warning=FALSE, slik at disse meldingene ikke vises i outputen.
+
+library(haven)
+library(readr)
+library(readxl)
+library(dplyr)
+library(psych)
+library(ggplot2)
+```
+
+## Importere data
+
+Så importerer vi data. I dette tilfellet henviser filbanen til en mappe "data" som ligger under working directory. Hvis du ønsker å kjøre dette skriptet selv så sørg for at filene ligger der, eller rediger filbanen i koden under slik at det blir riktig.
+
+For mer detaljer om forskjellen på `read_csv()` og `read_csv2()`, sjekk hjelpfila ved å taste `?read_csv2()` i Console.
+
+```{r message=FALSE, warning=FALSE}
+
+seleksjonsdata <- read_spss("data/seleksjonsdata.sav") # Lese fra SPSS-fil
+prestasjonsdataKS <- read_xlsx("data/Prestasjonsdata Krigsskolen.xlsx") # Lese fra Excel-fil
+prestasjonsdataSKSK <- read_xlsx("data/Karakterer og SML SKSK.xlsx") # Mer fra Excel
+prestasjonsdataLKS <- read_csv2("data/LuftKS karakterer.csv") # Og lese fra (europeisk) CSV-fil.
+
+```
+
+## Koble data
+
+Neste skritt er å koble dataene. Først brukes `bind_rows()` til å bygge et datasett `prestasjonsdata` ved å hekte de respektive settene med prestasjonsdata på hverandre. Deretter brukes `left_join()` til å koble `prestasjonsdata` og `seleksjonsdata` til et datasett `data`. I funksjonen `left_join()` brukes argumentet `by =` til å angi hvilken kolonne som skal brukes som koblingsnøkkel. Dersom det ikke spesifiseres brukes automatisk kolonner som har likt navn i begge datasettene.
+
+```{r message=FALSE, warning=FALSE}
+# Først prestasjonsdata
+prestasjonsdata <- bind_rows(prestasjonsdataKS, prestasjonsdataLKS)
+prestasjonsdata <- bind_rows(prestasjonsdata, prestasjonsdataSKSK)
+
+# Det er en preferansesak om man ønsker å "rydde etter seg" underveis ved å fjerne overflødige objekter. Det går an å "slå av og på" dette ved å fjerne eller legge til firkanttegnet foran linjen under:
+
+# rm(prestasjonsdataKS, prestasjonsdataLKS, prestasjonsdataSKSK)
+
+# Deretter Kobles prestasjonsdata og seleksjonsdata
+
+data <- left_join(seleksjonsdata, prestasjonsdata, by = "ID")
+
+# Vi brukte de to linjene under til å omdefinere de to variablene Gender og Skole til datatypen factor:
+
+data$Gender <- as_factor(data$Gender)
+data$Skole <- as_factor(data$Skole)
+
+# rm(seleksjonsdata, prestasjonsdata)
+
+```
+
+## Utforske data
+
+Vi var innom flere funksjoner for å få oversikt over dataene våre. Her var de viktigste. For mer info og alternativer, sjekk hjelpfilene til de individuelle funksjonene. Funksjonen `view()` føles veldig trygg og fin fordi den viser deg alle dataene, "SPSS/Excel-style". Men den ødelegger workflowen litt fordi dataene åpnes i et eget vindu. Den egner seg derfor altså ikke i et script, men kan være grei å bruke i console ved behov. Utover det brukte vi:
+
+```{r}
+describe(data, IQR = TRUE)
+
+head(data, n = 20)
+```
+
+Dette kan selvsagt kombineres med subsetting og sortering, slik at jeg f.eks. kan be om å få se de 20 radene med høyest Skolepoeng:
+
+```{r}
+head(arrange(data, desc(Skolepoeng)), n = 20)
+
+tail(data, n = 20)
+
+summary(data)
+
+pairs.panels(data[,-c(1, 2, 7)], density = FALSE, lm = TRUE, ellipses = FALSE, jiggle = TRUE, hist.col = "cornflowerblue", stars = TRUE, cex.cor = .6, cex = .2)
+```
+
+`pairs.panels()` har mange valgmuligheter. Her er det bare å utforske argumentene i hjelpfila.
+
+## Plotte data
+
+Vi brukte pakken `ggplot2` til å plotte data. Med funksjonen `ggplot()` bygger du plot steg for steg ved å først angi hvilket datasett du vil bruke, deretter "mappe" variabler til egenskaper/dimensjoner i plottet med `aes()`-funksjonen, som f.eks. x-akse, y-akse, farge etc. Til slutt velger du en eller flere geoms som du legger lagvis for å velge det visuelle uttrykket. Her finnes det uendelige muligheter. Det er bare å google for inspirasjon. Under er eksemplene vi brukte i workshopen:
+
+```{r message=FALSE, warning=FALSE}
+plot1 <- ggplot(data, aes(x = Skolepoeng)) +
+        geom_histogram()
+plot1
+```
+
+```{r message=FALSE, warning=FALSE}
+plot2 <- ggplot(data, aes(x = Skolepoeng)) +
+        geom_density()
+plot2
+```
+
+```{r message=FALSE, warning=FALSE}
+plot3 <- ggplot(data, aes(x = Skolepoeng, colour = Gender)) +
+        geom_density()
+plot3
+```
+
+```{r message=FALSE, warning=FALSE}
+plot4 <- ggplot(data, aes(x = Skolepoeng, colour = Skole)) +
+        geom_density()
+plot4
+```
+
+```{r message=FALSE, warning=FALSE}
+plot4 <- ggplot(data, aes(x = Skolepoeng, fill = Skole)) +
+        geom_density(alpha = .5)
+plot4
+```
+
+```{r message=FALSE, warning=FALSE}
+plot5 <- ggplot(data, aes(x = Skole, y = Skolepoeng, fill = Skole)) +
+        geom_boxplot()
+plot5
+```
+
+```{r message=FALSE, warning=FALSE}
+plot6 <- ggplot(data, aes(x = Skolepoeng, y = Hovedkarakter)) +
+        geom_point() +
+        geom_smooth(method = "lm")
+plot6
+```
+
+```{r message=FALSE, warning=FALSE}
+plot7 <- ggplot(data, aes(x = Skolepoeng, y = Hovedkarakter, colour = Skole)) +
+        geom_point() +
+        geom_smooth(method = "lm")
+plot7
+```
+
+For valgmuligheter og argumenter, sjekk hjelpfila til de individuelle geom-funksjonene eller aes-funksjonen. Beste tips er imidlertid boka R for data science (link lengre opp i dokumentet) som inneholder et veldig bra kapittel om ggplot.
+
+## Regresjoner
+
+Dette rakk vi ikke, men jeg hadde planlagt å gå gjennom grunnleggende syntax for regresjoner i R. Den er: `avhengigvariabel ~ uavhengigvariabel1 + uavhengigvariabel2 + ...`. Du bruker funksjoner som `lm()` eller `glm()` (sjekk hjelpfiler for detaljer og forskjeller) til å spesifisere disse modellene, og modellsyntaksen blir første argument. Datasettet spesifiseres i argumentet `data =`. Et eksempel på en hierarkisk regresjon gjennom å bygge og sammenligne flere modeller følger. Først spesifiserer man null-modellen:
+
+```{r}
+model1 <- lm(Hovedkarakter ~ Skolepoeng + AE, data = data)
+```
+
+Nå ligger denne modellen lagret som et objekt. Info om modellen kan hentes ut med f.eks. funksjonen `summary()`.
+
+```{r}
+summary(model1)
+```
+
+Deretter kan vi f.eks. spesifisere en ny modell som er lik som den forrige, men med en ekstra uavhengig variabel:
+
+```{r}
+model2 <- lm(Hovedkarakter ~ Skolepoeng + AE + Tj_snitt, data = data)
+summary(model2)
+```
+
+...og en tredje modell, med enda en:
+
+```{r}
+model3 <- lm(Hovedkarakter ~ Skolepoeng + AE + Tj_snitt + BS_karakter, data = data)
+summary(model3)
+```
+
+Modellene kan sammenlignes med funksjonen `anova()`:
+
+```{r}
+anova(model1, model2, model3)
+```
+
+Det finnes andre muligheter til å sammenligne modellene også. Jeg anbefaler å google i vei, for dette finnes det mange tutorials på. Evt. sjekk en av de gratis online bøkene jeg inkluderte link til. Slutningsstatistikk ramler litt utenfor scope på "R for Data science" tror jeg, men både "Learning Statistics with R" og "A Pirate's Guide to..." er nok bra på dette.

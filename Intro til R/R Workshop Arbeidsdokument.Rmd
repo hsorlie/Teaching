@@ -1,0 +1,146 @@
+---
+title: "R Workshop arbeidsdokument"
+author: "Henrik Sørlie"
+date: "9/3/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Intro til R
+
+I dag skal vi lære masse R. Vi skal importere, koble og analysere data.
+
+Her er pakkene vi kommer til å trenge:
+
+```{r Pakker, warning=FALSE}
+library(haven)
+library(readr)
+library(readxl)
+library(dplyr)
+library(tibble)
+library(psych)
+library(ggplot2)
+library(broom)
+```
+
+## Importere data
+
+Først skal vi importere data, både fra Excel-filer, SPSS-filer og CSV.
+
+```{r Importere data, message=FALSE, warning=FALSE}
+
+seleksjonsdata <- read_spss("data/seleksjonsdata.sav")
+prestasjonsdataKS <- read_xlsx("data/Prestasjonsdata Krigsskolen.xlsx")
+prestasjonsdataSKSK <- read_xlsx("data/Karakterer og SML SKSK.xlsx")
+prestasjonsdataLKS <- read_csv2("data/LuftKS karakterer.csv")
+
+```
+
+## Koble data
+
+Nå har vi importert alle dataene vi trenger, men vi må koble de sammen til ett datasett, med ID som koblingsnøkkel:
+
+```{r message=FALSE, warning=FALSE}
+
+#Koble prestasjonsdata:
+prestasjonsdata <- bind_rows(prestasjonsdataKS, prestasjonsdataLKS) 
+prestasjonsdata <- bind_rows(prestasjonsdata, prestasjonsdataSKSK)
+
+# Fjerne gamle objekter vi ikke trenger:
+rm(prestasjonsdataKS, prestasjonsdataLKS, prestasjonsdataSKSK)
+
+# Koble seleksjons- og prestasjonsdata etter ID:
+data <- left_join(seleksjonsdata, prestasjonsdata, by = "ID")
+
+# Endre datatype til faktor for variabler på nominalnivå.
+data$Gender <- as_factor(data$Gender)
+data$Skole <- as_factor(data$Skole)
+
+# Fjerne de gamle objektene:
+rm(prestasjonsdata, seleksjonsdata)
+
+```
+
+## Utforske data
+
+Nå som vi har datasettet vårt kan vi begynne å utforske det med forskjellige kommandoer:
+
+```{r Utforske data, paged.print=TRUE}
+data
+
+summary(data)
+
+describe(data)
+
+pairs.panels(data[,-c(1, 2, 7)], density = FALSE, lm = TRUE, ellipses = FALSE, jiggle = TRUE, hist.col = "green")
+```
+
+## Plotting
+
+Nå skal vi plotte dataene våre. Det gjør vi med ggplot2
+
+```{r Plots, message=FALSE, warning=FALSE}
+
+plot1 <- ggplot(data, aes(x = Skolepoeng)) +
+        geom_histogram()
+plot1
+
+plot2 <- ggplot(data, aes(x = Skolepoeng)) +
+        geom_density()
+plot2
+
+plot3 <- ggplot(data, aes(x = Skolepoeng, colour = Gender)) +
+        geom_density()
+plot3
+
+plot4 <- ggplot(data, aes(x = Skolepoeng, colour = Skole)) +
+        geom_density()
+plot4
+
+plot5 <- ggplot(data, aes(x = Hovedkarakter, fill = Skole)) +
+        geom_density(alpha = .5)
+plot5
+
+plot6 <- ggplot(data, aes(x = Skole, y = Skolepoeng, fill = Skole)) +
+        geom_boxplot()
+plot6
+
+plot7 <- ggplot(data, aes(x = Skolepoeng, y = Hovedkarakter)) +
+        geom_point()
+plot7
+
+plot8 <- ggplot(data, aes(x = Skolepoeng, y = Hovedkarakter)) +
+        geom_point() +
+        geom_smooth(method = "lm")
+plot8
+
+plot9 <- ggplot(data, aes(x = Skolepoeng, y = Hovedkarakter)) +
+        geom_point() +
+        geom_smooth(method = "loess")
+plot9
+
+plot10 <- ggplot(data, aes(x = Skolepoeng, y = Hovedkarakter, colour = Skole)) +
+        geom_point() +
+        geom_smooth(method = "lm")
+plot10
+```
+
+## lineære modeller / regresjoner
+
+```{r}
+
+model1 <- lm(Hovedkarakter ~ Skolepoeng + AE, data = data)
+summary(model1)
+tidy(model1)
+
+model2 <- lm(Hovedkarakter ~ Skolepoeng + AE + Tj_snitt, data = data)
+summary(model2)
+
+model3 <- lm(Hovedkarakter ~ Skolepoeng + AE + Tj_snitt + BS_karakter, data = data)
+summary(model3)
+
+anova(model1, model2, model3)
+```

@@ -1,0 +1,136 @@
+---
+title: "R Workshop 9.9."
+author: "Henrik Sørlie"
+date: "9/4/2019"
+output: html_document
+---
+
+# Forberedelser
+
+Vi starter med litt forberedelser.
+
+## Laste inn pakkene vi trenger
+
+Her laster vi inn de pakkene vi trenger
+
+```{r message=FALSE, warning=FALSE}
+library(haven)
+library(readr)
+library(readxl)
+library(dplyr)
+library(psych)
+library(ggplot2)
+library(ggstatsplot)
+```
+
+## Importere data
+
+Deretter skal vi improtere data fra ulike kilder:
+
+```{r message=FALSE, warning=FALSE}
+
+seleksjonsdata <- read_spss("data/seleksjonsdata.sav")
+prestasjonsdataKS <- read_xlsx("data/Prestasjonsdata Krigsskolen.xlsx")
+prestasjonsdataSKSK <- read_xlsx("data/Karakterer og SML SKSK.xlsx")
+prestasjonsdataLKS <- read_csv2("data/LuftKS karakterer.csv")
+
+```
+
+## Koble datasett
+
+Nå må vi koble datasettene sammen til ett stort datasett. Vi bruker ID som koblingsnøkkel.
+
+```{r message=FALSE, warning=FALSE}
+
+# Først kobler vi prestasjonsdataene sammen:
+prestasjonsdata <- bind_rows(prestasjonsdataKS, prestasjonsdataLKS)
+prestasjonsdata <- bind_rows(prestasjonsdata, prestasjonsdataSKSK)
+
+# Vi fjerner de originale datasettene:
+rm(prestasjonsdataKS, prestasjonsdataLKS, prestasjonsdataSKSK)
+
+# Deretter kobler vi prestasjonsdata mot seleksjonsdata:
+data <- left_join(seleksjonsdata, prestasjonsdata, by = "ID")
+
+# Omdefinere Gender og Skole til factor:
+data$Gender <- as_factor(data$Gender)
+data$Skole <- as_factor(data$Skole)
+
+# ...og fjerner de originale datasettene:
+rm(seleksjonsdata, prestasjonsdata)
+
+```
+
+## Utforske data
+
+Vi tar en titt på dataene våre:
+
+```{r}
+summary(data)
+describe(data)
+pairs.panels(data[,-c(1, 2, 7)], density = FALSE, lm = TRUE, ellipses = FALSE, jiggle = TRUE, hist.col = "green")
+```
+
+## Plotting
+
+Nå skal vi plotte dataene våre!
+
+```{r}
+
+plot1 <- ggplot(data, aes(x = Skolepoeng)) +
+        geom_histogram()
+plot1
+
+plot2 <- ggplot(data, aes(x = Skolepoeng)) +
+        geom_density()
+plot2
+
+plot3 <- ggplot(data, aes(x = Skolepoeng, colour = Gender)) +
+        geom_density()
+plot3
+
+plot4 <- ggplot(data, aes(x = Skolepoeng, colour = Skole)) +
+        geom_density()
+plot4
+
+plot4 <- ggplot(data, aes(x = Skolepoeng, fill = Skole)) +
+        geom_density(alpha = .3)
+plot4
+
+plot5 <- ggplot(data, aes(x = Skole, y = Skolepoeng, fill = Skole)) +
+        geom_boxplot()
+plot5
+
+plot6 <- ggplot(data, aes(x = Skolepoeng, y = Hovedkarakter)) +
+        geom_point() +
+        geom_smooth(method = "lm")
+plot6
+
+plot7 <- ggplot(data, aes(x = Skolepoeng, y = Hovedkarakter, colour = Skole)) +
+        geom_point() +
+        geom_smooth(method = "lm")
+plot7
+
+```
+
+## Lineære modeller / regresjoner
+
+```{r}
+model1 <- lm(Hovedkarakter ~ Skolepoeng + AE, data = data)
+summary(model1)
+```
+
+```{r}
+model2 <- lm(Hovedkarakter ~ Skolepoeng + AE + Tj_snitt, data = data)
+summary(model2)
+```
+
+```{r}
+model3 <- lm(Hovedkarakter ~ Skolepoeng + AE + Tj_snitt + BS_karakter, data = data)
+summary(model3)
+```
+
+```{r}
+anova(model1, model2, model3)
+```
+
