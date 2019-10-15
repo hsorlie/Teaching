@@ -5,8 +5,8 @@ account: hsorlie
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1333145
-bundleId: 2503186
+bundleId: 2503205
 url: https://hsorlie.shinyapps.io/Demo-Sentralgrenseteoremet/
-when: 1571174051.8361
+when: 1571174682.61665
 asMultiple: FALSE
 asStatic: FALSE
