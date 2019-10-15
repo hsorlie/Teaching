@@ -1,7 +1,6 @@
 
 library(tibble)
 library(ggplot2)
-library(sjPlot)
 
 ## Demo sentralgrenseteoremet
 
