@@ -1,6 +1,7 @@
 
 library(tibble)
 library(ggplot2)
+library(sjPlot)
 
 ## Demo sentralgrenseteoremet
 
@@ -10,10 +11,10 @@ library(ggplot2)
 # Fornuftige verdier for antall repetisjoner: 1-20000.
 
 # Antall terninger pr. kast
-terninger <- 5
+terninger <- 3
 
 # Antall ganger terningene kastes
-repetisjoner <- 5000
+repetisjoner <- 2000
 
 # Lag en tom resultattabell
 resultat <- integer(0)
@@ -43,16 +44,16 @@ plot <- ggplot(data = tabell) +
                 limits = as.character(1:(6*terninger)),
                 breaks = as.character(terninger:(6*terninger)),
                 labels = as.character(terninger:(6*terninger))) +
-        scale_y_continuous(name = "Antall kast") #+
+        scale_y_continuous(name = "Antall kast") +
 # Legg til normalfordelingskurve
-      #  if(terninger > 1 & repetisjoner > 10){
-      #  stat_function( 
-      #          fun = function(x, mean, sd, n){ 
-      #                  dnorm(
-      #                          x = x,
-      #                          mean = mean(tabell$verdi),
-      #                          sd = sd(resultat)) * length(resultat)
-      #          }, 
-      #          args = c(mean = mean, sd = sd, n = n))
-      #  }
+        if(terninger > 1 & repetisjoner > 10){
+        stat_function( 
+                fun = function(x, mean, sd){ 
+                        dnorm(
+                                x = x,
+                                mean = mean(tabell$verdi),
+                                sd = sd(resultat)) * length(resultat)
+                }, 
+                args = c(mean = mean, sd = sd))
+        }
 print(plot)
