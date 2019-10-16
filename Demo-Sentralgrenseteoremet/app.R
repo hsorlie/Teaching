@@ -1,32 +1,32 @@
 library(shiny)
+library(shinyWidgets)
 library(tibble)
 library(ggplot2)
 
 ui <- fluidPage(
 
     # Application title
-    titlePanel("Demo Sentralgrenseteoremet"),
-
+    titlePanel("Demo: the Central Limit Theorem"),
 
     sidebarLayout(
         sidebarPanel(
             sliderInput(inputId = "terninger",
-                        label = "Antall terninger pr. kast:",
+                        label = "Number of dice per throw:",
                         min = 1,
                         max = 10,
                         value = 1),
-            sliderInput(inputId = "repetisjoner",
-                        label = "Antall kast:",
-                        min = 1,
-                        max = 10000,
-                        value = 1)
+            sliderTextInput(inputId = "repetisjoner",
+                        label = "Number of throws:",
+                        choices = c("1", "2", "3", "4", "5", "10", "20", "50", "100", "200", "1000", "10000"),
+                        selected = 1,
+                        grid = TRUE),
+            includeText("explanation.txt")
             ),
 
         mainPanel(
            plotOutput(outputId = "plot")
-        ))
-    )
-
+        )),hr(),includeText("footer.txt")
+        )
 
 server <- function(input, output) {
     output$plot <- renderPlot({
@@ -54,11 +54,11 @@ server <- function(input, output) {
                     colour = I("blue2"),
                     fill = I("cornflowerblue"))) +
             scale_x_discrete(
-                name = "Verdi pr. terningkast",
+                name = "Total value per throw",
                 limits = as.character(1:(6*input$terninger)),
                 breaks = as.character(input$terninger:(6*input$terninger)),
                 labels = as.character(input$terninger:(6*input$terninger))) +
-            scale_y_continuous(name = "Antall kast") +
+            scale_y_continuous(name = "Number of throws") +
                 # Legg til normalfordelingskurve
                 if(input$terninger > 1 & input$repetisjoner > 10){
                     stat_function( 

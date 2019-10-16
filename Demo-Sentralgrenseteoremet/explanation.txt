@@ -1,0 +1,1 @@
+This is an explanation of the central limit theorem works, and how it is examplified through this app. I'll have to think about a clever way to explain it later. Main point: Outcomes that can happen in more ways are generally more likely than outcomes that can happen in fewer ways.
