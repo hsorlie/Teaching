@@ -2,6 +2,7 @@ library(shiny)
 library(shinyWidgets)
 library(tibble)
 library(ggplot2)
+library(markdown)
 
 ui <- fluidPage(
 
