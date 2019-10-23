@@ -10,6 +10,7 @@ ui <- fluidPage(
 
     sidebarLayout(
         sidebarPanel(
+            includeText("top.txt"),hr(),
             sliderInput(inputId = "terninger",
                         label = "Number of dice per throw:",
                         min = 1,
@@ -19,13 +20,12 @@ ui <- fluidPage(
                         label = "Number of throws:",
                         choices = c("1", "2", "3", "4", "5", "10", "20", "50", "100", "200", "1000", "10000"),
                         selected = 1,
-                        grid = TRUE),
-            includeText("explanation.txt")
-            ),
+                        grid = TRUE)
+        ),
 
         mainPanel(
            plotOutput(outputId = "plot")
-        )),hr(),includeText("footer.txt")
+        )),hr(),includeMarkdown("explanation.md"),hr(),includeMarkdown("footer.md")
         )
 
 server <- function(input, output) {
