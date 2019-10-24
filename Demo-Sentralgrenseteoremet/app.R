@@ -76,7 +76,7 @@ server <- function(input, output) {
                         args = c(mean = mean, sd = sd))
                 }
 })
-    })   
+    }, ignoreNULL = FALSE)   
     
 }
 
