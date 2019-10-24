@@ -19,9 +19,10 @@ ui <- fluidPage(
                         value = 1),
             sliderTextInput(inputId = "repetisjoner",
                         label = "Number of throws:",
-                        choices = c("1", "2", "3", "4", "5", "10", "20", "50", "100", "200", "1000", "10000"),
+                        choices = c("1", "2", "3", "4", "5", "10", "20", "50", "100", "200", "1000", "10000", "20000"),
                         selected = 1,
-                        grid = TRUE)
+                        grid = TRUE),
+            actionButton("update", "Roll'em again!", icon = icon("dice"))
         ),
 
         mainPanel(
@@ -30,6 +31,9 @@ ui <- fluidPage(
         )
 
 server <- function(input, output) {
+    observeEvent(input$update, {
+        
+
     output$plot <- renderPlot({
         
         resultat <- integer(0)
@@ -45,7 +49,7 @@ server <- function(input, output) {
                 resultat <- c(resultat, sum(kast))
                 tabell$antall[sum(kast)-(input$terninger-1)] <- tabell$antall[sum(kast)-(input$terninger-1)]+1
             }
-            
+
             
             ggplot(data = tabell) + 
             geom_col(
@@ -72,6 +76,8 @@ server <- function(input, output) {
                         args = c(mean = mean, sd = sd))
                 }
 })
+    })   
+    
 }
 
 # Run the application 
