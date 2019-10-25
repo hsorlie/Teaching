@@ -1,1 +1,1 @@
-The top slider determines how many dice you have in your hand for each throw. The bottom slider determines how many times you repeat the throw. The plot counts the total value of the dice you have in your hand per throw.
+The top slider determines how many dice you have in your hand when you throw. The bottom slider determines how many times you repeat the throw. The plot shows how many times you obtained each possible total outcome of the dice you had in your hand.

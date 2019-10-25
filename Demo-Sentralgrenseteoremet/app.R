@@ -7,7 +7,7 @@ library(markdown)
 ui <- fluidPage(
 
     # Application title
-    titlePanel("Demo: the Central Limit Theorem"),
+    titlePanel("The Central Limit Theorem"),
 
     sidebarLayout(
         sidebarPanel(
