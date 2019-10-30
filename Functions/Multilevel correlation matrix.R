@@ -1,4 +1,7 @@
-# This function is intended for reporting descriptive statistics for multilevel data. It creates a common table with Means and Standard Deviations in the two first columns, and a correlation matrix in the preceding columns. However, it uses psych::statsBy to obtain between-level and within-level correlations, and report them above/below the diagonal respectively. 
+# This function is intended for reporting descriptive statistics for multilevel data.
+# It is an adapted version of a function proposed by github.com/lgluca
+# It creates a common table with Means and Standard Deviations in the two first columns, and a correlation matrix in the preceding columns.
+# However, it uses psych::statsBy to obtain between-level and within-level correlations, and report them above/below the diagonal respectively. 
 
 glrstab<- function(x, group, export=FALSE) { # input is a dataset (x) that includes a grouping variable (group)
         
