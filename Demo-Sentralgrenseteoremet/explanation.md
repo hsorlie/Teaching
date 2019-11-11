@@ -2,6 +2,8 @@
 title: ""
 output: html_document
 ---
+What is the Central Limit Theorem, and why is it important in statistics? We'll get to that, but first let's roll some dice!
+
 **First, try throwing one die one time** (both sliders at 1), and repeat a few times (click the button) just to get a feeling for the plot. With one die, the range of possible total values for a throw is 1-6, as can be seen on the X-axis. So if you throw *one* die, the plot will show *one* blue bar with a height of 1 (the number of times you got that result) for the value shown on that die. **Now, change the bottom slider to a slightly larger number,** which simulates *repeating* that throw of one die at a time. The range of the X-axis stays the same since you throw one die at a time, but the bars now represent how many times you got a 1, how many times you got a 2, etc.
 
 **Experiment with number of throws, keeping the number of dice per throw at 1.** If the die is fair (it is. I promise.) there is a 1/6 chance of getting a 1, a 1/6 chance of getting a 2.. etc, and a 1/6 chance of getting a 6. This seems obvious, but we are interested in the *total* value obtained per throw, and the notable point is this: *Since there is only one die, there is only one possible way in which to get a total value per throw of 1*; namely, getting that 1 on your only die. With one die in your hand there is also only one possible way to get a total value of 2 for your throw, only one way to get a total value of 3, and so on. Since each possible total outcome is equally likely, the outcomes will tend to happen about as often. So as the number of throws start to get large, the bars will look increasingly equal in height.
