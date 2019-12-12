@@ -10,7 +10,7 @@ ui <- fluidPage(
 
     sidebarLayout(
         sidebarPanel(
-            includeText("top.txt"),hr(),
+            includeMarkdown("top.md"),hr(),
             sliderInput(inputId = "intercept",
                         label = "intercept: a",
                         min = -2,
@@ -46,7 +46,8 @@ server <- function(input, output) {
                 mapping = aes(
                     x = x,
                     y = y,
-                    colour = I("blue2"))) +
+                    colour = I("blue2")),
+                size = 2) +
             scale_x_continuous(
                 name = "x",
                 limits = c(-2,2),
@@ -56,7 +57,10 @@ server <- function(input, output) {
                 limits = c(-2,2),
                 breaks = c(-2, -1, 0, 1, 2)) +
             geom_vline(aes(xintercept = 0), show.legend = FALSE) +
-            geom_hline(aes(yintercept = 0), show.legend = FALSE)
+            geom_hline(aes(yintercept = 0), show.legend = FALSE) +
+            theme(text = element_text(size=40), axis.title.y = element_text(angle = 0, vjust = 0.5)) +
+            annotate("text", x = -2, y = 1.8, label = "y= a + b * x", hjust = 0, size = 8, family = "Courier") +
+            annotate("text", x = -2, y = 1.4, label = paste("y=", input$intercept, "+", input$slope, "* x", sep = ""), hjust = 0, size = 8, family = "Courier")
             
             }
 )
