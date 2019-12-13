@@ -60,7 +60,7 @@ server <- function(input, output) {
             geom_hline(aes(yintercept = 0), show.legend = FALSE) +
             theme(text = element_text(size=40), axis.title.y = element_text(angle = 0, vjust = 0.5)) +
             annotate("text", x = -2, y = 1.8, label = "y= a + b * x", hjust = 0, size = 8, family = "Courier") +
-            annotate("text", x = -2, y = 1.4, label = paste("y=", input$intercept, "+", input$slope, "* x", sep = ""), hjust = 0, size = 8, family = "Courier")
+            annotate("text", x = -2, y = 1.4, label = paste("y=", input$intercept, "+", input$slope, "*x", sep = ""), hjust = 0, size = 8, family = "Courier")
             
             }
 )
