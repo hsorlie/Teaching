@@ -2,4 +2,4 @@
 title: ""
 output: html_document
 ---
-A straight line on a plane is defined by two parameters: the intercept (a) and the slope (b). By setting these two parameters, any straight line can be described. The intercept determines where the line intercepts the y-axis, hence the name. The slope determines... well, the slope of the line. That is, for every increment along the x-axis, how much will the corresponding value on the y-axis increase.
+This app draws two random normal samples which are correlated approximately as specified by the drop-down menu. The purpose is to get a feel for how different scatterplots look at different values of r. Also, the slider lets you introduce one outlier, so you can see how this outlier affects the relationship between two variables that are highly correlated, or not correlated at all.

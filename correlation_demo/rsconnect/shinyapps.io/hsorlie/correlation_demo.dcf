@@ -1,0 +1,12 @@
+name: correlation_demo
+title: correlation_demo
+username:
+account: hsorlie
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 1598839
+bundleId: 2667112
+url: https://hsorlie.shinyapps.io/correlation_demo/
+when: 1576309437.65656
+asMultiple: FALSE
+asStatic: FALSE
