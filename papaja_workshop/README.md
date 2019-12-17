@@ -1,0 +1,1 @@
+# Collaborative writing with papaja in R
