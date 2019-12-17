@@ -22,7 +22,7 @@ ui <- fluidPage(
             includeMarkdown("top.md"),
             sliderInput("outlierx", "Value for x-axis:", min = -30, max = 30, value = 0),
             sliderInput("outliery", "Value for y-axis:", min = -30, max = 30, value = 0),
-            actionButton("update", "Reload")
+            actionButton("update", "Update")
         ),
         mainPanel(
             
@@ -58,7 +58,7 @@ server <- function(input, output) {
             raw[1,c(2,3,4,5,6,7)] <- input$outliery
             
  
-            output$data <- renderDataTable({  
+            output$data <- renderTable({  
                 if(input$strength == "perfect"){data <- tibble(x = round(raw$original, digits = 3),y = round(raw$perfect, digits = 3))}
                 if(input$strength == "verystrong"){data <- tibble(x = round(raw$original, digits = 3),y = round(raw$vstrong, digits = 3))}
                 if(input$strength == "strong"){data <- tibble(x = round(raw$original, digits = 3),y = round(raw$strong, digits = 3))}
