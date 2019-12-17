@@ -5,8 +5,8 @@ account: hsorlie
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1598839
-bundleId: 2667112
+bundleId: 2675254
 url: https://hsorlie.shinyapps.io/correlation_demo/
-when: 1576309437.65656
+when: 1576587946.05983
 asMultiple: FALSE
 asStatic: FALSE
