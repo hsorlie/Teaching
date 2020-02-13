@@ -1,6 +1,11 @@
 # Samarbeid om artikkelskriving i R med papaja
 
-Workshop på HVL Kronstad 26. og 27. februar 2020. [Rom 110 - Finn med MazeMap](http://bit.ly/2vse5Qb)
+Workshop på HVL Kronstad 26. og 27. februar 2020. [Rom 110 - Finn med MazeMap](http://bit.ly/2vse5Qb)  
+Hei, alle sammen! Nå gleder vi oss til å se dere på workshop. Her kommer litt informasjon om opplegget. Ikke nøl med å [ta kontakt](mailto:henrik.sorlie@uib.no) dersom det er noe!  
+
+Før dere møter er det viktig at dere har gjort noen forberedelser, så vi kan starte rett på og ikke bruke tid på workshopen til å installere programvare. Alt dere trenger å gjøre er gjengitt under.
+
+Når dette er gjort (og dere har brukernavn på Zotero og GitHub), så svar på mailen du fikk, og bekreft deltakelse, samt oppgi brukernavnene dine på Zotero og GitHub.
 
 ## Kjøreplan
 | Onsdag 26.2.      | Tid           | Innhold             | Ansvar |
@@ -22,3 +27,7 @@ Workshop på HVL Kronstad 26. og 27. februar 2020. [Rom 110 - Finn med MazeMap](
 | Lunsj             | 12:30-13:15 |                     |        |
 | Jobbe med egen artikkel | 13:15-14:45 | * Anledning til å få starthjelp med å flytte et eget pågående prosjekt inn i papaja og GitHub<br>* Pauser ved behov |     |
 | Avslutning og evaluering | 14:45-15:00 | Takk til alle som deltok!<br>Hvordan kan neste papaja-workshop bli bedre? | |
+
+## Forberedelser
+
+Her er forberedelsene du trenger å gjøre på forhånd:
