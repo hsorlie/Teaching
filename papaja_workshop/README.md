@@ -16,8 +16,7 @@ Workshop på HVL Kronstad 26. og 27. februar 2020. [Rom 110 - Finn med MazeMap](
 | papaja forts.     | 15:15 - 16:15 |                     | Henrik |
 | Pause             | 16:15 - 16:30 |                     |        |
 | Git og GitHub     | 16:30 - 18:00 | * Hva er versjonskontroll?<br>* Sette opp lokal Git mot GitHub<br>* RStudio integrasjon mot GitHub<br>* Commit, diff, push, pull, branch, merge | Henrik |
-| Felles middag for de som vil! | 19:00 - ??:?? |                     |        |  
-
+| Felles middag for de som vil! | 19:00 - ??:?? |                     |        |
 | Torsdag 27.2.     | Tid           | Innhold             | Ansvar |
 |:------------------|:-------------:|:--------------------|:-------|
 | Samarbeid om artikkel | 09:00 - 12:30 | * Utgangspunkt i et repo som inneholder tom mal og data<br>* Alle inviteres, og vi fordeler oppgaver<br>* Noen jobber med analyser, andre begynner å skrive<br>* Pull request, merge og så setter vi det sammen<br>* Pauser ved behov | Henrik |
