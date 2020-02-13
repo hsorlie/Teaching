@@ -1,6 +1,7 @@
 # Samarbeid om artikkelskriving i R med papaja
 
-Workshop på HVL Kronstad 26. og 27. februar 2020.
+Workshop på HVL Kronstad 26. og 27. februar 2020. Rom 110.
+<iframe width="600" height="420" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://use.mazemap.com/embed.html#v=1&zlevel=1&center=5.352083,60.368610&zoom=18&sharepoitype=poi&sharepoi=84219&campusid=9&utm_medium=iframe" style="border: 1px solid grey" allow="geolocation"></iframe><br/><small><a href="https://www.mazemap.com/">Map by MazeMap</a></small>
 
 ## Kjøreplan
 | Onsdag 26.2.      | Tid           | Innhold             | Ansvar |
@@ -16,4 +17,4 @@ Workshop på HVL Kronstad 26. og 27. februar 2020.
 | papaja forts.     | 15:15 - 16:15 |                     | Henrik |
 | Pause             | 16:15 - 16:30 |                     |        |
 | Git og GitHub     | 16:30 - 18:00 | * Hva er versjonskontroll?<br>* Sette opp lokal Git mot GitHub<br>* RStudio integrasjon mot GitHub<br>* Commit, diff, push, pull, branch, merge | Henrik |
-| Felles middag for de som vil! | 19:00 -  |                     |        |
+| Felles middag for de som vil! | 19:00 - ??:?? |                     |        |
