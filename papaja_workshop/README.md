@@ -43,7 +43,7 @@ Regner med alle har dette fra før. Oppdater gjerne til siste versjon av begge d
 * For å bruke Zotero med RStudio trenger du Zotero-pluginen Better BibTex: https://retorque.re/zotero-better-bibtex/installation/
 
 ### TinyTeX
-Du trenger en TeX-pakke for å lage PDFer av papaja-dokumentene dine. For papaja anbefales TinyTex, som du installerer i RStudio med følgende kode (hentet fra papaja-manualen<https://crsh.github.io/papaja_man/introduction.html#getting-started>):
+Du trenger en TeX-pakke for å lage PDFer av papaja-dokumentene dine. For papaja anbefales TinyTex, som du installerer i RStudio med følgende kode ([hentet fra papaja-manualen](https://crsh.github.io/papaja_man/introduction.html#getting-started)):
 
 ```r
 if(!"tinytex" %in% rownames(installed.packages())) install.packages("tinytex")
