@@ -21,5 +21,4 @@ Workshop på HVL Kronstad 26. og 27. februar 2020. [Rom 110 - Finn med MazeMap](
 | Samarbeid om artikkel | 09:00-12:30 | * Utgangspunkt i et repo som inneholder tom mal og data<br>* Alle inviteres, og vi fordeler oppgaver<br>* Noen jobber med analyser, andre begynner å skrive<br>* Pull request, merge og så setter vi det sammen<br>* Pauser ved behov | Henrik |
 | Lunsj             | 12:30-13:15 |                     |        |
 | Jobbe med egen artikkel | 13:15-14:45 | * Anledning til å få starthjelp med å flytte et eget pågående prosjekt inn i papaja og GitHub<br>* Pauser ved behov |     |
-| Avslutning og evaluering | 14:45-15:00 | Takk til alle som deltok!<br>
-Hvordan kan neste papaja-workshop bli bedre? |     |
+| Avslutning og evaluering | 14:45-15:00 | Takk til alle som deltok!<br>Hvordan kan neste papaja-workshop bli bedre? | |
