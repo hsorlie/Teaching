@@ -52,7 +52,7 @@ tinytex::install_tinytex()
 ```
 
 ### papaja
-papaja-pakken finnes ikke på CRAN (ennå), men installeres med følgende kode (fra papaja-manualen<https://crsh.github.io/papaja_man/introduction.html#getting-started>):
+papaja-pakken finnes ikke på CRAN (ennå), men installeres med følgende kode [hentet fra papaja-manualen](https://crsh.github.io/papaja_man/introduction.html#getting-started)):
 
 ```r
 # Install devtools package if necessary
@@ -67,14 +67,16 @@ Vi bruker Git og GitHub til versjonskontroll og samarbeid.
 
 * Først, lag deg en GitHub-konto, hvis du ikke allerede har en:  https://github.com/join?source=header-home
 
-For installasjon av Git lener jeg meg på gjennomgangen til Jenny Bryan<https://happygitwithr.com>:
+For installasjon av Git lener jeg meg på [gjennomgangen til Jenny Bryan](https://happygitwithr.com):
 
 * Installere Git: https://happygitwithr.com/install-git.html
 * Konfigurer Git med brukernavnet og mailadresse: https://happygitwithr.com/hello-git.html
 
 ### citr
 citr gir deg enkelt tilgang til å sitere fra Zotero-biblioteket ditt, inne i RStudio.
-`install.packages("citr")`
+```r
+install.packages("citr")`
+```
 RStudio må startes på nytt etter installasjon, for at citrs addin skal dukke opp på addins-menyen i RStudio.
 
 ## Det var det!
