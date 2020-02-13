@@ -1,7 +1,10 @@
 # Samarbeid om artikkelskriving i R med papaja
 
 Workshop på HVL Kronstad 26. og 27. februar 2020. Rom 110.
+
+<dl>
 <iframe width="600" height="420" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://use.mazemap.com/embed.html#v=1&zlevel=1&center=5.352083,60.368610&zoom=18&sharepoitype=poi&sharepoi=84219&campusid=9&utm_medium=iframe" style="border: 1px solid grey" allow="geolocation"></iframe><br/><small><a href="https://www.mazemap.com/">Map by MazeMap</a></small>
+</dl>
 
 ## Kjøreplan
 | Onsdag 26.2.      | Tid           | Innhold             | Ansvar |
