@@ -1,6 +1,7 @@
 # Samarbeid om artikkelskriving i R med papaja
 
-Workshop på HVL Kronstad 26. og 27. februar 2020. [Rom 110 - Finn med MazeMap](http://bit.ly/2vse5Qb)  
+Workshop på HVL Kronstad 26. og 27. februar 2020. [Rom 110 - Finn med MazeMap](http://bit.ly/2vse5Qb)
+
 Hei, alle sammen! Nå gleder vi oss til å se dere på workshop. Her kommer litt informasjon om opplegget. Ikke nøl med å [ta kontakt](mailto:henrik.sorlie@uib.no) dersom det er noe!  
 
 Før dere møter er det viktig at dere har gjort noen forberedelser, så vi kan starte rett på og ikke bruke tid på workshopen til å installere programvare. Alt dere trenger å gjøre er gjengitt under.
@@ -31,3 +32,53 @@ Når dette er gjort (og dere har brukernavn på Zotero og GitHub), så svar på 
 ## Forberedelser
 
 Her er forberedelsene du trenger å gjøre på forhånd:
+
+### R og RStudio
+Regner med alle har dette fra før. Oppdater gjerne til siste versjon av begge deler, før du begynner på resten her.
+
+### Zotero
+* Zotero er straightforward å installere herfra: https://www.zotero.org/download/
+* Fordi vi skal dele bibliotek med kilder trenger du en (gratis) Zotero-konto. Det får du her: https://www.zotero.org/user/register/
+* Sørg for å slå på synking av biblioteket ditt i Zotero-innstillingene.
+* For å bruke Zotero med RStudio trenger du Zotero-pluginen Better BibTex: https://retorque.re/zotero-better-bibtex/installation/
+
+### TinyTeX
+Du trenger en TeX-pakke for å lage PDFer av papaja-dokumentene dine. For papaja anbefales TinyTex, som du installerer i RStudio med følgende kode (hentet fra papaja-manualen<https://crsh.github.io/papaja_man/introduction.html#getting-started>):
+
+```r
+if(!"tinytex" %in% rownames(installed.packages())) install.packages("tinytex")
+
+tinytex::install_tinytex()
+```
+
+### papaja
+papaja-pakken finnes ikke på CRAN (ennå), men installeres med følgende kode (fra papaja-manualen<https://crsh.github.io/papaja_man/introduction.html#getting-started>):
+
+```r
+# Install devtools package if necessary
+if(!"devtools" %in% rownames(installed.packages())) install.packages("devtools")
+
+# Install the stable development verions from GitHub
+devtools::install_github("crsh/papaja")
+```
+
+### Git og GitHub
+Vi bruker Git og GitHub til versjonskontroll og samarbeid.
+
+* Først, lag deg en GitHub-konto, hvis du ikke allerede har en:  https://github.com/join?source=header-home
+
+For installasjon av Git lener jeg meg på gjennomgangen til Jenny Bryan<https://happygitwithr.com>:
+
+* Installere Git: https://happygitwithr.com/install-git.html
+* Konfigurer Git med brukernavnet og mailadresse: https://happygitwithr.com/hello-git.html
+
+### citr
+citr gir deg enkelt tilgang til å sitere fra Zotero-biblioteket ditt, inne i RStudio.
+`install.packages("citr")`
+RStudio må startes på nytt etter installasjon, for at citrs addin skal dukke opp på addins-menyen i RStudio.
+
+## Det var det!
+
+Gratulerer! Hvis du kom deg gjennom alt over uten feilmeldinger så hadde du flaks!
+
+Husk å svare på mail, og bekrefte deltakelse, samt oppgi Zotero- og GitHub-brukernavn. Sees!
