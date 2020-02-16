@@ -34,7 +34,7 @@ Når dette er gjort (og dere har brukernavn på Zotero og GitHub), så svar på 
 Her er forberedelsene du trenger å gjøre på forhånd:
 
 ### R og RStudio
-Regner med alle har dette fra før. Oppdater gjerne til siste versjon av begge deler, før du begynner på resten her.
+Regner med alle har dette fra før. Oppdater til siste versjon av begge deler (først R, så RStudio). Etter oppdatering av R og RStudio anbefales det at du kjører en runde i RStudio og oppdaterer alle pakkene du har. Sånn for sikkerhets skyld. Da er du klar for resten av lista:
 
 ### Zotero
 * Zotero er straightforward å installere herfra: https://www.zotero.org/download/
