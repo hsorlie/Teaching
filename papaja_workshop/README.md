@@ -70,7 +70,7 @@ Vi bruker Git og GitHub til versjonskontroll og samarbeid.
 For installasjon av Git lener jeg meg på [gjennomgangen til Jenny Bryan](https://happygitwithr.com):
 
 * Installere Git: https://happygitwithr.com/install-git.html
-* Konfigurer Git med brukernavnet og mailadresse: https://happygitwithr.com/hello-git.html
+* Konfigurer Git med brukernavnet og mailadresse: https://happygitwithr.com/hello-git.html Husk at du må oppgi mailadressen du brukte til å registrere deg på GitHub.
 
 ### citr
 citr gir deg enkelt tilgang til å sitere fra Zotero-biblioteket ditt, inne i RStudio.
@@ -81,6 +81,6 @@ RStudio må startes på nytt etter installasjon, for at citrs addin skal dukke o
 
 ## Det var det!
 
-Gratulerer! Hvis du kom deg gjennom alt over uten feilmeldinger så hadde du flaks!
+Gratulerer! Hvis du kom deg gjennom alle punktene uten feilmeldinger så hadde du flaks! Eller så var du dyktig!
 
 Husk å svare på mail, og bekrefte deltakelse, samt oppgi Zotero- og GitHub-brukernavn. Sees!
