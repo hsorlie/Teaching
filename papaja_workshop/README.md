@@ -12,7 +12,7 @@ Når dette er gjort (og dere har brukernavn på Zotero og GitHub), så svar på 
 | Onsdag 26.2.      | Tid           | Innhold             | Ansvar |
 |:------------------|:-------------:|:--------------------|:-------|
 | Velkommen / Intro | 10:00-10:20 | Oppstart, velkommen | Alle   |
-| Zotero            | 10:20-11:30 | * Hvorfor Zotero?<br>* Flytte EndNote bibliotek til Zotero<br>* Importere/legge til kilder<br>* Organisere biblioteket med tags<br>* Dele bibliotek med grupper     | Astrid |
+| Zotero            | 10:20-11:30 | * Hvorfor Zotero?<br>* Plugin i webleser (vise Chrome)<br>* Legge til ved hjelp av doi<br>* Legge til manuelt<br>* Overføre bibliotek fra Endnote<br>* Organisere biblioteket<br>* Sitere i Word<br>* Delte bibliotek på Zotero.org  | Astrid |
 | Pause             | 11:30-11:45 |                     |        |
 | RMarkdown         | 11:45-12:45 | * Hva er Markdown/RMarkdown?<br>* Tekstformattering med Markdown<br>* Kodechunks<br>* Inline kode | Thomas P |
 | Lunsj             | 12:45-13:30 |                     |        |
