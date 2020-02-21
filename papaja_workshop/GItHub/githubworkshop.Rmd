@@ -15,6 +15,9 @@ knitr::opts_chunk$set(echo = TRUE)
 - Opprette repo i GitHub (oppskrifter)
 - Opprette prosjekt i RStudio (copy/paste URL)
 - Good to go!
+- Lage nytt RMarkdown-dokument: bolleoppskrift
 
 2. Hva vil det si å "committe"
-- Gjøre endringer.
+- Gjøre endringer til bolleoppskriften, lagre
+- Commit
+- 
