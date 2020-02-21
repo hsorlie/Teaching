@@ -12,27 +12,77 @@ knitr::opts_chunk$set(echo = TRUE)
 ## GitHub-delen av papaja-workshop
 
 1. Starte et nytt prosjekt i RStudio med versjonskontroll
-- Opprette repo i GitHub (oppskrifter)
+- Opprette repo i GitHub (bolleoppskrift)
+- SØrge for at det initialises med readme
 - Opprette prosjekt i RStudio (copy/paste URL)
 - Good to go!
-- Lage nytt RMarkdown-dokument: bolleoppskrift
 
-2. Hva vil det si å "committe"
-- Gjøre endringer til bolleoppskriften, lagre
-- Commit
-- Committ er GitHubs "lagre-knapp". Du committer det du allerede har lagret.
-- Pull og push gjør det du tror det gjør: Pusher en committet versjon til GitHub, eller Puller siste versjon fra GitHub.
+2. Åpne readme-en. Lage tre overskrifter, og skrive inn følgende info:
+
+# boller
+
+Her kommer en oppskrift på noen herlige boller.
+
+## Ingredienser
+
+- Mel
+- Gjær
+
+## Slik gjør du
+
+- Bland mel og gjær
+- Trill boller
+- Stek i ovnen på 250 grader i et kvarters tid
+
+3. Committe dette.
+- Hva vil det si å committe?
+- Committ er GitHubs "lagre-knapp". Du committer det du allerede har lagret. Deretter Push. Forskjell på local og origin.
 
 Veksle frem og tilbake mellom Web og RStudio, og se endringer.
+
+4. Legge til mer, og comitte:
+Legg til følgende under Ingredienser:
+- Melk
+- Smør
+
+Legg til følgende under "slik gjør du":
+- Smelt smør og bland i melka
+- Hell melk/smør i melet/gjæren
+- Elt masse
+
+Deretter committe igjen.
+
+Vise frem på GitHub på Web: Titte på commits. Kan kommenteres, endringer highlightes...
 
 3. Branch
 - Lage ny branch når du ønsker å teste noe. Eksperimentere. Eller når forskjellige personer jobber med hver sin del av et prosjekt.
 - Du lager vel å merke ikke en branch av én fil, men av repoet. Hele prosjektet.
 - Lage branch for å teste sjokoboller:
-- Branche bolleoppskriften - kalle den sjokoboller.
-- Legge til ingrediens - kakaopulver - og tilberedning (helle i kekeopulver)
-- Endre noe annet i mellomtiden. Skrive en liten innledning: "Dette blir veldig gode boller" etc.
+- Branche bolleoppskriften - kalle den "sjokotest"
 
-4. Opprette en pull request. Merge.
+Legge til følgende under ingredienser:
+- Sjokolade
 
-Se på det endelige dokumentet.
+Legge til følgende under "slik gjør du":
+- Hakk sjokoladen i biter
+- Bland bitene i deigen
+
+Commit.
+
+Titte på web igjen. Se på de ulike branchene hvordan det ser ut. Titte på commits for de ulike branchene.
+
+Tilbake i RStudio: Se på de ulike branchene.
+
+4. Endre på master-branchen:
+Legge til følgende bak setningen "Her kommer en oppskrift på noen herlige boller.": Disse kan du servere hvis du får besøk. De er kjappe å lage, og blir veldig gode.
+
+Commit igjen, og push.
+
+Igjen. Se på forskjellen på master, og på sjokotest. Både på web og i RStudio.
+
+4. Opprette en pull request fra sjokotest. Merge.
+
+Se på det endelige dokumentet på web. Magi!
+
+Tilbake i RStudio: Pull!
+Magi!
