@@ -1,0 +1,20 @@
+---
+title: "GitHub-workshop"
+author: "Henrik Sørlie"
+date: "2/21/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## GitHub-delen av papaja-workshop
+
+1. Starte et nytt prosjekt i RStudio med versjonskontroll
+- Opprette repo i GitHub (oppskrifter)
+- Opprette prosjekt i RStudio (copy/paste URL)
+- Good to go!
+
+2. Hva vil det si å "committe"
+- Gjøre endringer.
