@@ -20,4 +20,19 @@ knitr::opts_chunk$set(echo = TRUE)
 2. Hva vil det si å "committe"
 - Gjøre endringer til bolleoppskriften, lagre
 - Commit
-- 
+- Committ er GitHubs "lagre-knapp". Du committer det du allerede har lagret.
+- Pull og push gjør det du tror det gjør: Pusher en committet versjon til GitHub, eller Puller siste versjon fra GitHub.
+
+Veksle frem og tilbake mellom Web og RStudio, og se endringer.
+
+3. Branch
+- Lage ny branch når du ønsker å teste noe. Eksperimentere. Eller når forskjellige personer jobber med hver sin del av et prosjekt.
+- Du lager vel å merke ikke en branch av én fil, men av repoet. Hele prosjektet.
+- Lage branch for å teste sjokoboller:
+- Branche bolleoppskriften - kalle den sjokoboller.
+- Legge til ingrediens - kakaopulver - og tilberedning (helle i kekeopulver)
+- Endre noe annet i mellomtiden. Skrive en liten innledning: "Dette blir veldig gode boller" etc.
+
+4. Opprette en pull request. Merge.
+
+Se på det endelige dokumentet.
