@@ -16,12 +16,11 @@ Når dette er gjort (og dere har brukernavn på Zotero og GitHub), så svar på 
 | Pause             | 11:30-11:45 |                     |        |
 | RMarkdown         | 11:45-12:45 | * Hva er Markdown/RMarkdown?<br>* Tekstformattering med Markdown<br>* Kodechunks<br>* Inline kode | Thomas P |
 | Lunsj             | 12:45-13:30 |                     |        |
-| Better BiBTeX og citr | 13:30-14:00 | * Sette keyboard shortcut for citr i RStudio<br>* Benytte citr til å sitere i RMarkdown<br>* Sitere fra delt bibliotek | Henrik |
-| papaja            | 14:00-15:00 | * Oppsett av papaja-mal<br>* YAML front matter<br>* egne papaja-funksjoner: printnum() og apa_table() | Henrik |
-| Pause             | 15:00-15:15 |                     |        |
-| papaja forts.     | 15:15-16:15 |                     | Henrik |
-| Pause             | 16:15-16:30 |                     |        |
-| Git og GitHub     | 16:30-18:00 | * Hva er versjonskontroll?<br>* Sette opp lokal Git mot GitHub<br>* RStudio integrasjon mot GitHub<br>* Commit, diff, push, pull, branch, merge<br>* Jobbe med GitHub web-grensesnitt | Henrik |
+| Git og GitHub | 13:30-15:00 | * Hva er versjonskontroll?<br>* Jobbe med GitHub web-grensesnitt<br>* RStudio integrasjon mot GitHub<br>* Lage testprosjekt i RStudio med versjonskontroll<br>* Commit, diff, push, pull, branch, pull request, merge | Henrik |
+| Pause             | 15:00-15:20 |                     |        |
+| papaja            | 15:20-16:30 | * Oppsett av papaja-mal<br>* YAML front matter<br>* egne papaja-funksjoner: printnum() og apa_table() | Henrik |
+| Pause             | 16:30-16:45 |                     |        |
+| papaja forts.     | 16:45-18:00 | * Sitering i RStudio med citr, Zotero og BetterBibTeX<br>* Jobbe med papaja testdokument<br>* Knit til PDF eller Word | Henrik |
 | Felles middag for de som vil! | 19:00-??:?? |                     |        |
 | **Torsdag 27.2.**     | **Tid**           | **Innhold**             | **Ansvar** |
 | Samarbeid om artikkel | 09:00-12:30 | * Utgangspunkt i et GitHub repo som inneholder tom mal og data<br>* Alle inviteres, vi fordeler oppgaver og brancher. Noen jobber med analyser, andre begynner å skrive på ulike deler.<br>* Kildehenvisninger fra delt Zotero-bibliotek<br>* Pull request, merge og så setter vi det sammen<br>* Pauser ved behov | Henrik |
