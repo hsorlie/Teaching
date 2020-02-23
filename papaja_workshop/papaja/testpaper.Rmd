@@ -169,7 +169,7 @@ colnames(descriptives) <- c("$M$", "$SD$", "1", "2", "3")
 apa_table(descriptives, escape  = FALSE, caption = "Descriptive statistics of study variables", note = "* p < .05, ** p < .01, *** p < .001", landscape = FALSE)
 
 ```
-Table \@ref(tab:descriptivestable) shows the means, standard deviations and correlations between all study variables. A significant correlation was found between pancakeliking and zombieness (`r `). 
+Table \@ref(tab:descriptivestable) shows the means, standard deviations and correlations between all study variables.
 
 # Discussion
 ```{r firstplot, fig.cap="This plot says it all", fig.align="center"}
