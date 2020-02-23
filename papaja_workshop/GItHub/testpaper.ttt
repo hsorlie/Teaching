@@ -1,0 +1,29 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:descriptivestable}Descriptive statistics of study variables}
+
+\begin{tabular}{llllll}
+\toprule
+ & \multicolumn{1}{c}{$M$} & \multicolumn{1}{c}{$SD$} & \multicolumn{1}{c}{1} & \multicolumn{1}{c}{2} & \multicolumn{1}{c}{3}\\
+\midrule
+1 - Age & 23.69 & 4.71 &  &  & \\
+2 - Motivation & -0.11 & 1.00 & -.10 &  & \\
+3 - Pancake liking & 0.00 & 0.92 & .12 & -.08 & \\
+4 - Zombieness & -0.06 & 0.63 & -.23* & .42** & .49**\\
+\bottomrule
+\addlinespace
+\end{tabular}
+
+\begin{tablenotes}[para]
+\normalsize{\textit{Note.} * p < .05, ** p < .01, *** p < .001}
+\end{tablenotes}
+
+\end{threeparttable}
+\end{center}
+
+\end{table*}

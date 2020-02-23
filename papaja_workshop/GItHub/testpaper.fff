@@ -1,0 +1,10 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+
+{\centering \includegraphics{testpaper_files/figure-latex/firstplot-1}
+
+}
+
+\caption{This plot says it all}\label{fig:firstplot}
+\end{figure*}
