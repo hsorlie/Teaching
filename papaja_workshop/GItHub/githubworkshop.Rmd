@@ -11,14 +11,25 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## GitHub-delen av papaja-workshop
 
+I denne workshopen skal vi ta en titt på GitHub, og se hvordan det kan hjelpe oss å holde kontroll på arbeidet, eller samarbeide.
+
+Arbeid på GitHub er samlet i Repositories, eller repos. Dette er ikke helt som en mappe, men på en måte. Et repo kan inneholde mange mapper som du bruker til å sortere alle filene i et prosjekt. Ett repo bruker man normalt til å jobbe på ett prosjekt, hva nå enn det prosjektet skulle være.
+
+På samme måte skal vi begynne å sortere det vi gjør i RStudio i prosjekter. Mange som har brukt Prosjekter i RStudio allerede? Jeg gjorde ikke det før jeg startet med å bruke GitHub. Da hadde jeg en mappe på maskinen min som het R, og så laget jeg mapper under der hvor jeg sorterte alt jeg jobbet med. Og hver gang jeg åpnet en fil og skulle jobbe med den så måtte jeg set wordking directory med `setwd()`. Høres det kjent ut? Det skal vi ikke gjøre.
+
+Det finnes flere måter å koble et prosjekt i RStudio med et repository på GitHub på. Vi skal gjøre det på GitHub-først-måten. Det er enklest, og gir best kontroll.
+
+Så, for å lære oss litt GitHub og hvordan det virker sammen med RStudio skal vi nå tenke oss at vi skal i gang med et nytt prosjekt: En oppskrift på boller. Boller er veldig godt. Vi starter da med å opprette prosjektet vårt på GitHub:
+
 1. Starte et nytt prosjekt i RStudio med versjonskontroll
 - Opprette repo i GitHub (bolleoppskrift)
-- SØrge for at det initialises med readme
+- Sørge for at det initialises med readme
 - Opprette prosjekt i RStudio (copy/paste URL)
 - Good to go!
 
-2. Åpne readme-en. Lage tre overskrifter, og skrive inn følgende info:
+2. Åpne readme-en. Skrive inn følgende info:
 
+```
 # boller
 
 Her kommer en oppskrift på noen herlige boller.
@@ -33,39 +44,50 @@ Her kommer en oppskrift på noen herlige boller.
 - Bland mel og gjær
 - Trill boller
 - Stek i ovnen på 250 grader i et kvarters tid
+```
 
 3. Committe dette.
 - Hva vil det si å committe?
-- Committ er GitHubs "lagre-knapp". Du committer det du allerede har lagret. Deretter Push. Forskjell på local og origin.
+- Committ er GitHubs "lagre-knapp". Du committer det du allerede har lagret. Deretter Push.
+
+Forskjell på local og origin.
 
 Veksle frem og tilbake mellom Web og RStudio, og se endringer.
 
 4. Legge til mer, og comitte:
 Legg til følgende under Ingredienser:
+```
 - Melk
 - Smør
+```
 
 Legg til følgende under "slik gjør du":
+```
 - Smelt smør og bland i melka
 - Hell melk/smør i melet/gjæren
 - Elt masse
+```
 
 Deretter committe igjen.
 
 Vise frem på GitHub på Web: Titte på commits. Kan kommenteres, endringer highlightes...
 
-3. Branch
+5. Branch
 - Lage ny branch når du ønsker å teste noe. Eksperimentere. Eller når forskjellige personer jobber med hver sin del av et prosjekt.
 - Du lager vel å merke ikke en branch av én fil, men av repoet. Hele prosjektet.
 - Lage branch for å teste sjokoboller:
 - Branche bolleoppskriften - kalle den "sjokotest"
 
 Legge til følgende under ingredienser:
+```
 - Sjokolade
+```
 
 Legge til følgende under "slik gjør du":
+```
 - Hakk sjokoladen i biter
 - Bland bitene i deigen
+```
 
 Commit.
 
@@ -73,14 +95,17 @@ Titte på web igjen. Se på de ulike branchene hvordan det ser ut. Titte på com
 
 Tilbake i RStudio: Se på de ulike branchene.
 
-4. Endre på master-branchen:
-Legge til følgende bak setningen "Her kommer en oppskrift på noen herlige boller.": Disse kan du servere hvis du får besøk. De er kjappe å lage, og blir veldig gode.
+6. Endre på master-branchen:
+Legge til følgende bak setningen "Her kommer en oppskrift på noen herlige boller.":
+```
+Disse kan du servere hvis du får besøk. De er kjappe å lage, og blir veldig gode.
+```
 
 Commit igjen, og push.
 
 Igjen. Se på forskjellen på master, og på sjokotest. Både på web og i RStudio.
 
-4. Opprette en pull request fra sjokotest. Merge.
+7. Opprette en pull request fra sjokotest. Merge.
 
 Se på det endelige dokumentet på web. Magi!
 
