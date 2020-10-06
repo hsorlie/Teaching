@@ -4,6 +4,8 @@ This is where I collect the resources I use myself for teaching.
 
 Not much here at the moment, but I suppose it's a place to grow.
 
+*UPDATE october 6th, 2020: My employer recently cancelled their Panopto license, and as a result my videos are not online anymore. I'm aware of the broken links. I have made sure I have the raw video files, and as soon as I have a little time to spare I plan to edit them from scratch and put them on Vimeo or something. We apologize for the inconvenience.*
+
 1. Currently preparing a workshop on **Collaborative writing with papaja in R**, to be held in late february. Materials [in this folder](/papaja_workshop), as they are developed. (Update: This workshop was held, and turned out to be a lot of fun! I intend to clean up the materials in this folder as soon as I find the time, so they are more easy to re-use for another workshop, either held by me or someone else.)  
 
 1. My methods lectures have so far been done mostly in Keynote, so they're not here. I have, however, recorded my **"Basic descriptive statistics" lecture, so [that video is here](https://fhs.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=d9e92689-c36e-4304-8fc1-ab4a00c38831) (in norwegian)**. I'll consider recording other lectures as well, but it hasn't been a priority. Also, as part of those lectures I have wanted to explain a few things interactively, so I have made tiny Shiny apps for that purpose:  
