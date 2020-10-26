@@ -4,7 +4,7 @@ This is where I collect the resources I use myself for teaching.
 
 Not much here at the moment, but I suppose it's a place to grow.
 
-*UPDATE october 6th, 2020: My employer recently cancelled their Panopto license, and as a result my videos are not online anymore. I'm aware of the broken links. I have made sure I have the raw video files, and as soon as I have a little time to spare I plan to edit them from scratch and put them on Vimeo or something. We apologize for the inconvenience.*
+*UPDATE october 6th, 2020: My employer recently cancelled their Panopto license, and as a result two of my videos are not online anymore. I'm aware of the broken links. I have made sure I have the raw video files, and as soon as I have a little time to spare I plan to edit them from scratch and put them on Vimeo or something. We apologize for the inconvenience.*
 
 1. Currently preparing a workshop on **Collaborative writing with papaja in R**, to be held in late february. Materials [in this folder](/papaja_workshop), as they are developed. (Update: This workshop was held, and turned out to be a lot of fun! I intend to clean up the materials in this folder as soon as I find the time, so they are more easy to re-use for another workshop, either held by me or someone else.)  
 
@@ -20,4 +20,4 @@ Not much here at the moment, but I suppose it's a place to grow.
 
 3. I was asked to make a **video to demo [JASP](https://jasp-stats.org) and [Jamovi](https://www.jamovi.org)**, to students and researchers who might consider switching from SPSS. [That video is here](https://fhs.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=76e17bcf-2a02-4be8-8bbb-ab49009c420e) (in norwegian).
 
-4. After this I wanted to make a similar **video to demo [Zotero](https://www.zotero.org)**, to encourage students and researchers to start using it, and perhaps make the switch from Endnote. [That video is here](https://fhs.cloud.panopto.eu/Panopto/Pages/Viewer.aspx?id=480458de-be2f-4877-b95a-ab5200c22ee4) (in norwegian).
+4. After this I wanted to make a similar **video to demo [Zotero](https://www.zotero.org)**, to encourage students and researchers to start using it, and perhaps make the switch from Endnote. [That video is here](https://vimeo.com/472030108) (in norwegian).
