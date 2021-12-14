@@ -3,6 +3,7 @@ library(shinyWidgets)
 library(tibble)
 library(ggplot2)
 library(markdown)
+library(scales)
 
 ui <- fluidPage(
 
@@ -15,7 +16,7 @@ ui <- fluidPage(
             sliderInput(inputId = "terninger",
                         label = "Number of dice per throw:",
                         min = 1,
-                        max = 10,
+                        max = 100,
                         value = 1),
             sliderTextInput(inputId = "repetisjoner",
                         label = "Number of throws:",
@@ -50,19 +51,28 @@ server <- function(input, output) {
                 tabell$antall[sum(kast)-(input$terninger-1)] <- tabell$antall[sum(kast)-(input$terninger-1)]+1
             }
 
+# Fjerne dette senere
+tabell$verdi <- rescale(tabell$verdi, to = c(1, 5), from = range(tabell$verdi, na.rm = TRUE, finite = TRUE))
+
+tabell$topp <- ifelse(cumsum(tabell$antall)<=input$repetisjoner*0.95, 0, 1)
             
-            ggplot(data = tabell) + 
-            geom_col(
+            ggplot(data = tabell, aes(x = verdi, y = antall)) + 
+            geom_col(data = subset(tabell, topp == 0),
                 mapping = aes(
-                    x = verdi,
-                    y = antall,
                     colour = I("blue2"),
                     fill = I("cornflowerblue"))) +
+                geom_col(data = subset(tabell, topp == 1),
+                         mapping = aes(
+                             colour = I("red"),
+                             fill = I("pink"))) +
             scale_x_discrete(
                 name = "Total value per throw",
-                limits = as.character(1:(6*input$terninger)),
-                breaks = as.character(input$terninger:(6*input$terninger)),
-                labels = as.character(input$terninger:(6*input$terninger))) +
+                limits = as.character(1:5),
+                breaks = as.character(1:5),
+                labels = as.character(1:5)) +
+                #limits = as.character(1:(6*input$terninger)),
+                #breaks = as.character(input$terninger:(6*input$terninger)),
+                #labels = as.character(input$terninger:(6*input$terninger))) +
             scale_y_continuous(name = "Number of throws") +
                 # Legg til normalfordelingskurve
                 if(input$terninger > 1 & input$repetisjoner > 10){

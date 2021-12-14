@@ -1,9 +1,18 @@
 ---
-title: "Intro til R Script"
+title: "Intro til R"
 output: html_document
 ---
 
-# Intro til R for FALK
+# Velkommen
+
+(Keynote)
+Hei, og velkommen!
+Og takk for invitasjonen.
+
+Speaker notes i Keynote.
+
+Keynote ferdig.
+
 
 ```{r Laster pakker, message=FALSE, warning=FALSE}
 library(dplyr)
@@ -17,6 +26,8 @@ library(broom)
 library(ggplot2)
 library(ggstatsplot)
 ```
+
+# Intro
 
 ## Orientere seg i RStudio
 
@@ -48,22 +59,25 @@ Ok, vi skal opprette en scriptfil og jobbe med den snart. Men nå må vi få tas
 På sitt mest grunnleggende oppfører R seg som en kalkulator. Formuler et matematisk uttrykk i console, og du får et svar på neste linje.
 
 ```{r}
+#I console:
 1 + 1
 34 / 3
 45 * (13 - 54)
 ```
 
-Legg merke til at før vært svar står det et ettall, i firkantklammer. Med disse eksemplene får vi ett element til svar hver gang. Elementet "2", f.eks. Ettallet viser at 2 er det første elementet i svaret vårt. Hvis vi hadde fått en lang remse over flere linjer i svar, så står det et slikt tall i firkantklemmer for hver linje, som angir hvilket element det første på den linja er.
+Legg merke til at før hvert svar står det et ettall, i firkantklammer. Med disse eksemplene får vi ett element til svar hver gang. Elementet "2", f.eks. Ettallet viser at 2 er det første elementet i svaret vårt. Hvis vi hadde fått en lang remse over flere linjer i svar, så står det et slikt tall i firkantklemmer for hver linje, som angir hvilket element det første på den linja er.
 
 ## Assigne objekter
 
 Vi kan gi innhold til objekter, som vi assigner. Et slik objekt har et navn og navnet kan være enten bare en bokstav eller et lengre ord.
 
-For eksempel kan jeg definere et objekt jeg kaller x, og assigne det den numeriske verdien 1.
+For eksempel kan jeg definere et objekt jeg kaller x, og tildele eller assigne det den numeriske verdien 1.
 
-I R brukes en pil som assignment operator: <- 
+I R brukes en pil mot venstre som assignment operator: <- 
+Du kan tenke på pila som at den tar det til høyre for seg, og putter det inn i det til venstre for seg.
 
 ```{r}
+# I console:
 x <- 1
 x
 y <- 2
@@ -77,27 +91,33 @@ z <- y^y
 z
 ```
 
-Dette er et bedre tidspunkt å forklare Environment på. Environmentet ditt utgjøres av den samlingen av objekter som til enhver tid eksisterer i minnet. Altså objekter du har assignet. Akkurat nå inneholder mitt environment tre objekter: x, y og z. Hvis du assigner noe til et objektnavn du allerede har definert, så overskrives det gamle innholdet.
+Dette er et bedre tidspunkt å forklare Environment på. Environmentet ditt utgjøres av den samlingen av objekter som til enhver tid eksisterer i minnet. Altså objekter du har assignet. Akkurat nå inneholder mitt environment tre objekter: x, y og z. Hvis du assigner noe til et objektnavn du allerede har definert, så overskrives alt det gamle innholdet.
 
-Du kan også fjerne objekter fra Environment. Det tar jeg etterpå.
+Du kan også fjerne objekter fra Environment. Det tar vi etterpå.
 
 ## Ulike datatyper, vektorer og subsetting
 
-Kommandoen c() "concatenate" brukes til å koble sammen enkeltelementer til vektorer, i ett objekt. Når det først er gjort kan du jobbe videre med vektoren som ett enkeltobjekt. Alle regneoperasjoner du gjør med en vektor utføres med hvert enkelt ledd i vektoren separat. Du kan også benytte c() til å hekte vektorer på hverandre, til en lengre vektor.
+Funksjonen c() "concatenate" brukes til å koble sammen enkeltelementer til vektorer, i ett objekt. Vektor er R-navnet på en serie av verdier. Vi kunne kalt det en variabel, antar jeg. Når vi først har koblet sammen verdiene til en vektor kan du jobbe videre med vektoren som ett enkeltobjekt. Alle regneoperasjoner du gjør med en vektor utføres med hvert enkelt ledd i vektoren separat. Du kan også benytte c() til å hekte vektorer på hverandre, til en lengre vektor.
 
 ```{r}
+# I console:
 x <- c(5, 2, 3, 5, 2, 4, 4, 2)
 x
-length(x)
-class(x)
+length(x) #funksjonen length tar en vektor som argument, og returnerer lengden på vektoren.
+class(x) #Funksjonen class tar en vektor som argument, og returnerer typen vektor. ALtså om den er numerisk, logisk eller består av tekst. Denne er numerisk, og vi kan se på et par alternativer snart.
+
 x + 10
 x * 10
-x + 1000
+x + 1000 #Dere ser her at en operasjon som gjøres med en vektor gjøres med alle verdiene i vektoren separat, og de separate svarene returneres.
 
-y <- rep(c(10, 200), times = 4)
+y <- rep(c(10, 200), times = 4) # rep() er en funksjon som tar to argumenter, adskilt med komma. Det første argumentet er noe som skal repeteres. Det andre argumentet, times, er hvor mange ganger det skal repeteres.
 y
 
-# Hvis vi utfører en operasjon med to vektorer av lik lengde utføres operasjonen med hhv første ledd i begge vektorene, andre ledd i begge vektorene etc. etc.
+# Hvis vi utfører en operasjon med to vektorer av lik lengde utføres operasjonen med hhv første ledd i begge vektorene, andre ledd i begge vektorene etc. etc. Legg merke til at x og y er like lange.
+
+length(x)
+length(y)
+length(x) == length(y) #I R brukes "dobbelt-er-lik-tegn" til å angi den logiske operatoren "er lik", i betydningen at noe sammenlignes. Dette er for å unngå misforståelser, for erlik-tegnet kan ha en annen betydning også, at noe tildeles en verdi, ikke ulikt venstrepila, som brukes i noen tilfeller. Poenget er uansett at hvis du vil sammenligne verdier, og be R fortelle deg om det ene er lik det andre, så må du bruke doble erliktegn.
 
 z <- x + y
 z
@@ -120,9 +140,13 @@ z
 Et objekt, enten det er en vektor eller én verdi, trenger ikke være et tall. Den kan også være logisk, eller tekst. Først tekst:
 
 ```{r}
+#I console:
+
 # w <- c(blue, green, red, yellow)
 
-# Dette blir feil, fordi når vi skriver navn på denne måten så tror R at "blue" og "green" etc. er objekter, som vi refererer til. Vi må bruke gåseøyne på ting som skal lagres som tekststring:
+# Dette blir feil, fordi når vi skriver navn på denne måten så tror R at "blue" og "green" etc. er objekter, som vi refererer til. Vi må bruke hermetegn på ting som skal lagres som tekststring:
+
+#Hente opp den gamle kommandoen, dobbelklikke på tall og legge til anførselstegn.
 
 w <- c("blue", "green", "red", "yellow")
 w
@@ -133,6 +157,8 @@ class(w)
 Vi bruker firkantklammer bak objektet til subsetting, altså til å gjøre utdrag eller velge elementer fra en vektor.
 
 ```{r}
+# I console:
+
 # Første element i z
 z[1]
 
@@ -155,17 +181,16 @@ z[c(1:3,6)]
 # Minus kan brukes til å angi "ikke". Altså, alle elementer untatt det andre:
 z[-2]
 
-# Jeg viste hvordan du kan subsette etter elementers plassering i vektoren. Man du kan også subsette etter elementets verdi.
+# På denne måten kan du subsette etter elementers plassering i vektoren. Man du kan også subsette etter elementets verdi.
 
 z[z < 10]
 
 z[z > 20]
 
-
 #I R brukes "dobbelt-er-lik-tegn" til å angi den logiske operatoren "er lik".
 z[z == 22]
 
-# Merk at nå ber jeg om å få returnert de elementene i z som er lik 22. Da får jeg tilbake fire tilfeller av 22, men ingen info om hvor i z de sto. Istedet kan jeg si til R at z = 22, og jeg får tilbake de tilfellene der dette er sant og de tilfellene der det ikke er sant:
+# Merk at nå ber jeg om å få returnert de elementene i z som er lik 22. Da får jeg tilbake fire tilfeller av 22, men ingen info om hvor i z de sto. Det er ærlig talt middels nyttig. Istedet kan jeg si til R at z = 22, og jeg får tilbake de tilfellene der dette er sant og de tilfellene der det ikke er sant:
 
 z == 22
 
@@ -176,13 +201,13 @@ q
 length(q)
 class(q)
 
-# Eller, hvis jeg lurte på hvilke elementer i z som var 22, kan jeg bruke:
+# Eller, hvis jeg lurte på hvilke elementer i z som var 22, kan jeg bruke funksjonen which():
 
 which(z == 22)
 
 which(q)
 
-# Det funksjonen which() gjør er at den returnerer plasseringen på de tilfellene der et logisk utsagn er sant. z == 22 er et slikt utsagn, så du kan fore which() med det. Men q er også et slikt utsagn, så det funker også.
+# Det funksjonen which() gjør er at den tar et logisk utsagn som argument, og returnerer plasseringen på de tilfellene der det er sant. z == 22 er et slikt utsagn, så du kan fore which() med det. Men q er også et slikt utsagn, så det funker også.
 
 # Dette fungerer med tekstvektorer også:
 
@@ -192,10 +217,10 @@ w
 which(w == "green")
 which(w == "blue")
 
-# I tillegg kan jeg bruke anledningen til å vise frem funksjonen sort()
+# I tillegg kan jeg bruke anledningen til å vise frem funksjonen sort(). Den tar en vektor som argument, og returnerer den ferdig sortert.
 
-sort(w)
-sort(w, decreasing = TRUE)
+sort(w) # I tilfellet tekstvektorer blir det alfabetisk
+sort(w, decreasing = TRUE) #Dersom argumentet decreasing ikke spesifiseres så settes det by default til FALSE. Men det kan spesifiseres til TRUE.
 
 # Merk at jeg ikke har endret på w nå. Fargene ligger fremdeles i den opprinnelige rekkefølgen. Jeg har bare bedt om å få dem fremvist sortert. Derimot, hvis jeg gjør slik:
 
@@ -229,22 +254,18 @@ data
 
 # Dette er en vrien måte å gjøre det på. Hvis vi har vektorer liggende i environment fra før kan vi bruke de, ved å oppgi navnet på dem.
 
-time <- c(45, 40, 42, 47, 43)
-speed <- c(34, 36, 32, 34, 23)
+x <- c(45, 40, 42, 47, 43)
+y <- c(34, 36, 32, 34, 23)
 
 data2 <- tibble(
-        tid = time,
-        fart = speed,
+        tid = x,
+        fart = y,
 
 # Man kan også definere kolonner som matematiske uttrykk, og man kan referere til tidligere kolonner når man oppretter nye
         
         distanse = tid * fart
 )
 
-# Hvis man har en tibble som allerede er opprettet, og ønsker å legge til en ny kolonne matematisk, bruker man funksjonen mutate(). Det første argumentet mutate() tar er navnet på objektet/tabellen/tibblen du skal bruke. Det andre argumentet og utover, er de nye kolonnene, på samme syntax som når du oppretter tibble.
-
-data3 <- mutate(data,
-                  distance = speed * time)
 ```
 
 Vi kan subsette tabelldata på samme måte som med vektorer, med firkantklammer. Husk at dere da må ha et komma inni firkantklammene, og at rader kommer først og kolonner etter
@@ -277,7 +298,6 @@ Nå kommer et bra triks: Hvis dere lurer på hva en funksjon gjør, og hvilke ar
 
 ```{r}
 
-?mutate
 ?rep
 ?which
 ?sort
@@ -286,29 +306,29 @@ Nå kommer et bra triks: Hvis dere lurer på hva en funksjon gjør, og hvilke ar
 
 ## Slette alt i Environment og sette Working Directory
 
-mutate() er en supernyttig funksjon. Typisk bruk er f.eks. til summescorer på testverktøy. Det finnes mange andre funksjoner også, som er nyttige til "datamassasje", før man begynner med analyser. Og det vi har lært til nå kan kombineres. Du kan f.eks. regne ut en ny variabel basert på to eller flere andre, men kun i de bestemte tilfellene hvor gitte forutsetninger er tilstede, som f.eks. kun der en verdi i en variabel er under eller over en gitt verdi.
+Men vi skal videre. Å sitte og taste inn data manuelt med tibble() er ikke noe særlig effektivt. Jeg lover at det har vi gjort for siste gang. Fra nå skal vi importere data.
 
-Men vi skal videre. Å sitte og taste inn data manuelt med tibble() er ikke noe særlig effektivt. Derfor tenkte jeg at vi kunne importere data også.
-
-Og herfra og ut skal vi bygge et script som vi tar vare på. Så dette er et godt tidspunkt å opprette en ny fil på, og nullstille Environment. Da må vi sjekke at vi jobber på riktig sted på PCen vår, altså i riktig mappe. Alltid når vi henviser til filer vi skal importere i R-koden vår, så tenker jo R at vi befinner oss et spesielt sted i filstrukturen, kalt Working Directory. Vi kan sjekke hva som er vår working directory akkurat nå ved å skrive getwd().
+Vi skal ta pause, men først et par ord om filstruktur og working directory. Vi kan, med R-kode, henvise til filer som ligger lagret på maskinen vår, og vi kan selv opprette og lagre filer. Så når vi jobber så tenker alltid R at den befinner seg på et bestemt sted i filstrukturen vår, eller jobber ut fra et bestemt sted. Dette kalles working directory. Vi kan finne ut hva som er vårt nåværende working directory med funksjonen getwd().
 
 ```{r}
 
 getwd()
 
-#Ikke? Da bruker dere Fil-explorern til å bla dere frem til mappa dere skal jobbe i. Så trykker dere på tannhjulet, "More", og velger "Set Working Directory". Det resulterer i en linje kode i console. Å taste den linja manuelt hadde gjort samme jobben som å klikke på Set Working Directory. Har dere workshop-mappa som working directory nå? Det må dere. Og så har dere en mappe som heter data i deres Working Directory.
+#Hvis vi hadde lagret en fil med R-kode nå, uten å spesifisere hvor, så hadde den blitt lagret i denne banen. Vi kunne definert et annet sted, men da måtte vi spesifisert det med utgangspunkt i dette stedet.
 
-getwd()
-
-# Så kan jeg vise hvordan man sletter objekter man har lagret i environment. Det gjør du med kommandoen rm(). Så kan du liste opp én eller flere objekter du vil slette.
+# Vi kan også angi working directory med tilsvarende kommendo setwd(). Men det er litt knottete å holde på slik, og istedet så skal vi jobbe med Prosjekter, en funksjon i RStudio som tar seg av dette for oss. Det kan vi opprette etter pausen, men først skal jeg vise hvordan dere sletter ting fra Environment. Det gjør du med kommandoen rm(). Så kan du liste opp én eller flere objekter du vil slette.
 
 rm(x)
 
 #Er det flere adskiller du med komma:
 
-rm(speed, time)
+rm(q, w)
 
-# Du kan også slette alle objekter i environment samtidig, med kommandoen:
+#Du kan bruke funksjonen ls til å få listet opp alle nåværende objekter i Environment som en tekststring.
+
+ls()
+
+# Og rm()-funksjonen har et argument som heter list, som tar en tekststring med navn på objekter som input. Følgelig kan du alltid slette alle objekter i environment samtidig, med kommandoen:
 
 rm(list = ls())
 
@@ -316,31 +336,145 @@ rm(list = ls())
 
 (PAUSE) 50 min. hit, inkl. Keynote.
 
-# Starte nytt prosjekt i RMarkdown
+# Tidyverse
 
-Da har vi et tomt Environment, og riktig Working Directory, så da kan vi begynne på et nytt prosjekt.
+## Prosjekter
 
-Da velger dere File, New File, RMarkdown.
+Når vi nå fortsetter skal vi først opprette et Prosjekt. Prosjekter er en funksjonalitet i RStudio som gjør at vi slipper å bekymre oss for mye om working directory og slikt. Innenfor ett prosjekt kan du holde deg med så mange filer du bare vil, og lagre og styre på. Men du kan jobbe med flere prosjekter separat, i ulike RStudio-vinduer, samtidig om så. Environment holdes adskilt, og working directory settes til folderen for prosjektet. Jeg enbefaler at dere lager dere en mappe under Dokumenter, som dere f.eks. kaller R. Den mappen blir i så fall det naturlige stedet å lagre prosjektene deres.
 
-Gi den en tittel. Dette kan du lett endre etterpå. Bare la type stå til HTML.
+Opprette nytt prosjekt...
 
-Lagre det en gang. Sjekk at det blir lagret i workshop-mappa. Gi det et navn.
+Da har vi et tomt Environment, og Working Directory er satt til dette prosjektet, så det slipper vi å tenke på. I dette prosjektet kan vi nå åpne en ny fil. En script-fil.
 
-Med RMarkdown samles kode i chunks, sånn som disse. Alt inni en slik chunk kjøres som kode. Alt mellom chunks behandles som tekst. Hvis dere ser på RMarkdown-sidene i folderen dere har fått så ser dere hvordan man angir overskrifter, f.eks.
+Da velger dere File, New File, RScript. Det er lettere å jobbe med en scriptfil enn direkte i console fordi du her kan flikke og flikke på koden, og så trykke på Play når den ser klar ut, så sendes den til console.
 
-Så bare for å vise frem mulighetene litt kan vi lage en overskrift her, # Workshop: Intro til R. Og så kan vi jo lage en mindre overskrift her, ## Import av data. Og så kan vi skrive et par setninger. Når vi er ferdige i dag skal vi ta en titt på hvordan dette dokumentet ser ut når vi strikker en HTML-fil av det.
+## Data transformasjon
 
-Til å importere data skal vi bruke funksjoner fra et par forskjellige pakker, så først må vi laste disse, slik at de er aktive:
+Vi skal i hovedsak herfra titte på tidyverse, et sett pakker som fungerer bra sammen for å lese, transformere og behandle data, og plotte. Tidyverse består som sagt av flere pakker, hver med et sett funksjoner. Men de er laget på en slik måte at de har felles syntaks, og felles oppbygning av argumenter.
+
+Vi begynner med å laste et datasett, så vi har noe å jobbe med. Det finner vi i pakken "nycflights13".
 
 ```{r}
-library(haven)
-library(readr)
-library(readxl)
-
-library(dplyr)
+#install.packages("nycflights13")
+library(nycflights13)
 ```
 
+Her er de viktigste funksjonene vi skal bruke:
+
+`filter()` velger observasjoner/rader, basert på verdi.
+`select()` velger variabler basert på navn.
+`mutate()` lar oss lage nye variabler eller endre gamle.
+`summarise()` koker ned flere verdier til ett tall.
+
+Alle disse funksjonene fungerer på følgende måte: De tar et objekt, som et datasett, som første argument. For alle påfølgende argumenter sier du hva du vil gjøre med datasettet, ved å bruke variabelnavn. Outputen av funksjonen er et nytt datasett.
+
+Og dette fungerer sammen med funksjonen `group_by()`. Den gjør at hver av de andre funksjonene fungerer innad i en hver definerte gruppe av datasettet, og ikke bare på datasettet som helhet. Si f.eks. at du bruker summarise() til å lage snittscorer for variabler. Da vil group_by() sørge for at snittet ikke blir for datasettet som helhet, for innad for hver gruppe basert på en annen variabel.
+
+Her er dataene våre:
+```{r}
+flights
+```
+
+Vi kan få mer info om det med
+```{r}
+?flights
+```
+
+Det inneholder faktiske data om hvert eneste fly som forlot New York i 2013, i alt 336.776 observasjoner av 19 variabler.
+
+Vi kan begynne med filter(). La oss si at vi er interessert kun i flyene som forlot NY på kvinnedagen:
+```{r}
+filter(flights, month == 3, day == 8)
+
+#Og nå får vi det bare listet opp. Men hvis vi vil ta vare på det så kan vi selvsagt assigne det til et nytt objekt med en gang, slik:
+
+fly8mars <- filter(flights, month == 3, day == 8)
+
+#Vi kan bruke logiske operators for å angi flere tilstander som må oppfylles. Her finner vi f.eks. alle avgangene i november og desember ved å be om november ELLER desember.
+
+filter(flights, month == 11 | month == 12)
+
+#Eller vi kan finne alle avgangene i juni som var mer enn én time forsinket:
+
+filter(flights, month == 6 & dep_delay > 60)
+
+# Ok, det var filter. Neste er select(). Den er ganske basic. Den bare plukker variablene du er interessert i. Men den er ganske praktisk hvis du skal sakse ned et stort datasett til noe mer håndterbart for å gjøre analyser.
+
+select(flights, carrier, flight, distance)
+
+#Du kan bruke kolon : for å angi alle variabler mellom to.
+
+select(flights, carrier, flight, year:day)
+
+#Du kan også bruke hjelpefunksjonene starts_with(), ends_with() eller contains()
+
+select(flights, contains("delay"), carrier, year:day)
+
+# Og så mutate(). Den er supernyttig. La oss først lage et lite datasett med noen få variabler:
+
+miniflights <- select(flights, year:day, ends_with("delay"), distance, air_time)
+
+#Mutate lager nye variabler og legger dem til bakerst på datasettet. 
+
+mutate(miniflights,
+  gain = dep_delay - arr_delay,
+  speed = distance / air_time * 60
+)
+
+#Vi kan bruke en beslektet funksjon, transmute(), istedenfor, hvis vi kun vil ha de nye variablene, og ikke beholde de gamle.
+
+transmute(miniflights,
+  gain = dep_delay - arr_delay,
+  speed = distance / air_time * 60
+)
+
+#Og legg også merke til at man kan referere til variabler man nettopp har opprettet:
+
+transmute(miniflights,
+  gain = dep_delay - arr_delay,
+  speed = distance / air_time * 60,
+  hours = air_time / 60,
+  gain_per_hour = gain / hours
+)
+
+#Neste er summarise(). Den kollapser en variabel ned til én verdi. 
+
+summarise(flights, mean_delay = mean(dep_delay))
+
+#Yes! Nå fikk vi NA. Så dette er et fint tidspunkt å ta det på. NA står for "not available", og det er slik missing verdier ser ut i R. Tolkningen er altså at der det står NA vet ikke R hva det egentlig skulle stått. Og NA er svært smittsomt, fordi nesten alle operasjoner som involverer én NA også får NA til svar. Et eksempel:
+x <- c(1, 2, 3, 4, 5)
+y <- 10
+z <- NA
+
+x + y
+x + z
+
+# Dette er virkelig noe å ha i bakhodet, f.eks. når man regner summescorer av items, for å få scorer på variabler. For det betyr at hvis du ikke foretar deg noe så blir hele summescorer NA, eller missing, for en respondent hvis én av itemene er NA. Hvis det er et måleverktøy der mange items laster på én faktor, så kan det bli ganske stygt. Jeg har vært borti dette med f.eks. NEO, som har 240 items som laster på 30 personlighetsfasetter, som igjen laster på 5 personlighetsfaktorer. Det var et datasett på et par tusen, og det var ikke veldig mye missing, men noe. Og der det var missing var det kanskje slik at en respondent hadde missing på én item av 240, midt inni der et sted. Og hvis én av åtte items i en fasett er missing så blir fasetten missing. Og hvis én av seks fasetter i en faktor er missing, så blir faktoren missing. Noen ganger må det jo bare bli sånn, men man må kanskje i det minste kunne diskutere hvor mange items man kan tåle er missing uten at det går ut over konstruktvaliditeten hvis man tar snittet av de resterende.
+
+# Jeg vet ikke hva som er riktig sånn sett, men den tekniske løsninga er enkel. Vi må ofte be R eksplisitt om å ignorere NAer.
+
+summarise(flights, mean_delay = mean(dep_delay, na.rm = TRUE))
+
+# Da får vi et svar. Men denne funksjonen er riktignok ikke veldig nyttig med mindre den kombineres med group_by, så da tar vi den.
+
+flightsbycarrier <- group_by(flights, carrier)
+
+#Sammenlign disse datasettene et øyeblikk:
+flights
+flightsbycarrier
+
+#Ser dere at de ser like ut? Like dimensjoner, samme variabler. Men den ene har angitt "groups". 16 ulike verdier av carrier. Og alle andre funksjoner vi gjør med dette datasettet, blir gjort for hver gruppe av datasettet. Iallefall alle tidyverse-funksjoner respekterer denne grupperingen.
+
+summarise(flightsbycarrier, mean_delay = mean(dep_delay, na.rm = TRUE))
+
+```
+
+## Importere og koble data
+
 Vi kan importere data fra hvilken som helst kilde. Fra Excel, fra CSVer, fra ren tekst, fra SPSS-filer. Hva som helst. I dette tilfellet skal vi importere data fra en SPSS-fil. Den funksjonaliteten ligger ikke i R i utgangspunktet, men den mest brukte pakken som gir oss denne funksjonaliteten heter Haven. I tillegg til SPSS-filer gir haven mulighet til å importere og eksportere data fra Stata og SAS, hvis noen skulle trenge det.
+
+Dere har fått delt noen filer som vi skal bruke.
+Jeg foreslår at dere legger de under en mappe som heter "data" der dere har prosjektet dere. Slik...
 
 ```{r message=FALSE, warning=FALSE}
 
@@ -369,8 +503,6 @@ prestasjonsdataSKSK <- read_xlsx("data/Karakterer og SML SKSK.xlsx")
 prestasjonsdataLKS <- read_csv2("data/LuftKS karakterer.csv")
 
 ```
-
-## Koble datasett
 
 De tre datasettene vi nå har, som inneholder prestasjonsdata, har alle den samme ID-kolonnen, men inneholder jo ikke noen av de samme verdiene for ID, siden ingen kadetter har gått på både f.eks. Krigsskolen og Sjøkrigsskolen. Disse tre datasettene kan vi altså stable oppå hverandre, uten noe mer om og men. Til det skal vi bruke funksjonen bind_rows(). Den funksjonen er en del av dplyr-pakka, som vi allerede har lastet inn. Samtidig, hvis vi åpner RStudio fra scratch en annen gang, og kjører dette scriptet, så vil ikke dplyr være lastet. Så for ryddighetsskyld kan vi føye dplyr til lista over pakker vi laster i begynnelsen. :
 
@@ -480,7 +612,12 @@ pairs.panels(data[,-c(1, 2, 7)])
 
 # Og så bruker vi dette til å gjøre om innstillingene for plottet slik vi vil ha det. For eksempel:
 
-pairs.panels(data[,-c(1, 2, 7)], density = FALSE, lm = TRUE, ellipses = FALSE, jiggle = TRUE, hist.col = "green")
+pairs.panels(data[,-c(1, 2, 7)],
+             density = FALSE,
+             lm = TRUE,
+             ellipses = FALSE,
+             jiggle = TRUE,
+             hist.col = "green")
 
 ```
 
@@ -558,7 +695,43 @@ plot10
 
 Dette var ment som en smakebit på ggplot. Og jeg har knapt touchet innpå mulighetene til å definere absolutt alt på disse plottene. Egne farger, konfidensintervall av eller på, hvor stort, definere labels, tittel, tykkelser på linjer etc. etc. Her er det bare å utforske hjelp-filene, eller google etter det du lurer på. Det finnes et tonn av ulike tutorials på hvordan man gjør alt mulig med ggplot, det er bare å søke dem opp.
 
-Det finnes også en del pakker som bygger videre på ggplot. De tar enkle argumenter og gir dem videre til ggplot for å lage en del spesialplot, som f.eks, interaksjonsplot eller Johnson-Neyman plot.
+Det finnes også en del pakker som bygger videre på ggplot. De tar enkle argumenter og gir dem videre til ggplot for å lage en del spesialplot, som f.eks, interaksjonsplot eller Johnson-Neyman plot. Sjekk ut pakkene ggstatsplot, f.eks., eller interactions.
+
+## Pipes
+Ok, her kommer et bra triks for å holde koden ryddig og lesbar.
+
+Hoppe til Keynote.
+
+Ok, så la oss demoe piper. 
+
+```{r}
+
+#La oss si at vi er interessert i flyvninger fra NYs JFK, til Los Angeles. Og vi er interessert i hvorvidt det er forskjeller i forsinkelser på tvers av f.eks. vår og høst. Og vi vil se forskjeller på ulike flyselskaper.
+
+flights %>%
+        subset(origin == "JFK" & dest == "LAX") %>%
+        subset(month == 3:5 | month == 9:11) %>%
+        select(origin, dest, arr_delay, carrier, month) %>%
+        mutate(season = ifelse(month < 6, "spring", "fall")) %>%
+        group_by(season, carrier) %>%
+        summarise(delay = mean(arr_delay, na.rm =TRUE)) %>%
+        pivot_wider(names_from = season, values_from = delay)
+
+```
+
+Og hvis vi vil assigne dette til et objekt kan vi gjøre det helt øverst, til venstre.
+
+Jeg skal ikke demonstrere ytterligere hvordan denne koden hadde sett ut uten bruk av pipes. Jeg tipper dere ser selv at det hadde vært ganske mye mer rotete.
+
+# RMarkdown
+
+Hvor mange har hørt om Markdown?
+
+Markdown er genialt. Det er 
+
+
+
+# SÅ langt har jeg kommet til nå...
 
 Eller pakken ggstatsplot, som også baserer seg på ggplot. Den gir deg plot som også inkluderer statistikken:
 
@@ -569,6 +742,10 @@ https://indrajeetpatil.github.io/ggstatsplot/
 ggscatterstats(data = data, x = Skolepoeng, y = Hovedkarakter)
 
 ```
+
+
+
+
 
 # Korrelasjonsmatrise
 
@@ -663,4 +840,10 @@ Swirl - Lær deg R, i R. Denne er genial. Det blir litt som å spille et spill.
 
 likert
 
+Gi den en tittel. Dette kan du lett endre etterpå. Bare la type stå til HTML.
 
+Lagre det en gang. Sjekk at det blir lagret i workshop-mappa. Gi det et navn.
+
+Med RMarkdown samles kode i chunks, sånn som disse. Alt inni en slik chunk kjøres som kode. Alt mellom chunks behandles som tekst. Hvis dere ser på RMarkdown-sidene i folderen dere har fått så ser dere hvordan man angir overskrifter, f.eks.
+
+Så bare for å vise frem mulighetene litt kan vi lage en overskrift her, # Workshop: Intro til R. Og så kan vi jo lage en mindre overskrift her, ## Import av data. Og så kan vi skrive et par setninger. Når vi er ferdige i dag skal vi ta en titt på hvordan dette dokumentet ser ut når vi strikker en HTML-fil av det.
