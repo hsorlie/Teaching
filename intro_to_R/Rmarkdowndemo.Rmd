@@ -1,0 +1,80 @@
+---
+title: "Seleksjonsdata"
+author: "Henrik Sørlie"
+date: "12/14/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(haven)
+library(readxl)
+library(psych)
+
+```
+
+Her kan man bruke vanlig tekst. Linjeskift skjer automatisk, så for organisasjonens del, (og med tanke på fremtidig bruk av Git), er det en god vane å bruke én linje på én setning. Setningene havner likevel bak hverandre.
+
+Med mindre man hopper over en linje. Da renderes det som nytt avsnitt. Og man kan fortsette å bruke én linje på én setning.
+
+# Dette er en overskrift
+
+## Dette er en overskrift på lavere nivå
+
+### Og så videre
+
+Her kommer det enda mer tekst. I et markdowndokument generelt, og også i RMarkdowndokumenter, kan man angi *kursiv* og **fete typer** lett.
+
+Vi kan også lage bullet-lister:
+
+-   Dette er en bullet
+
+-   Og dette er en.
+
+-   Og enda en
+
+Og her kommer det enda mer tekst.
+Og så enda en setning.
+Vi kan bruke redigeringsknappen her oppe til høyre for å få et mer wysiwyg-grensesnitt, slik vi er vant til fra f.eks. word.
+
+## Oversikt over data
+
+Nå kommer det som er mest genialt med RMarkdown.
+RMarkdown lar oss kombinere tekst og R-kode, og når vi "strikker" dokumentet til HTML, Word eller PDF, så får vi automatisk et dokument der koden er kjørt og resultatene vises som del av dokumentet.
+
+```{r data, echo=FALSE, message=FALSE, warning=FALSE}
+
+#Lese og koble data:
+seleksjonsdata <- read_spss("data/seleksjonsdata.sav")
+prestasjonsdataKS <- read_xlsx("data/Prestasjonsdata Krigsskolen.xlsx")
+prestasjonsdataSKSK <- read_xlsx("data/Karakterer og SML SKSK.xlsx")
+prestasjonsdataLKS <- read_csv2("data/LuftKS karakterer.csv")
+
+prestasjonsdata <- bind_rows(prestasjonsdataKS, prestasjonsdataLKS)
+prestasjonsdata <- bind_rows(prestasjonsdata, prestasjonsdataSKSK)
+
+data <- left_join(seleksjonsdata, prestasjonsdata, by = "ID")
+
+rm(prestasjonsdata, seleksjonsdata, prestasjonsdataKS, prestasjonsdataLKS, prestasjonsdataSKSK)
+
+summary(data)
+
+```
+
+## Inkludere visualiseringer
+
+Her kan vi plotte dataene, og de dukker da opp i dokumentet.
+
+```{r pressure, echo=TRUE, message=FALSE, warning=FALSE}
+pairs.panels(data[,-c(1, 2, 7)],
+             density = FALSE,
+             lm = TRUE,
+             ellipses = FALSE,
+             jiggle = TRUE,
+             hist.col = "cornflowerblue",
+             stars = TRUE)
+```
+
+
