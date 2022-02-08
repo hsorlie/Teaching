@@ -1094,7 +1094,7 @@ hostfly <- flights %>%
 
 Utvalget vårt besto av samtlige `r nrow(varfly)` fly som fløy denne ruta i de tre vårmånedene mars, april og mai, samt samtlige `r nrow(hostfly)` fly som fløy denne ruta i de tre høstmånedene september, oktober og november, totalt `r nrow(varfly) + nrow(hostfly)` fly.
 
-## lineære modeller / regresjoner
+# lineære modeller / regresjoner
 
 Til slutt hadde jeg tenkt å vise dere hvordan helt ordinære regresjoner virker i R.
 Dette er en intro til R, ikke til statisikk, men dette gir oss en mulighet til å teste regresjonssyntax for R, og den er normalt lik på tvers av pakker.
@@ -1135,7 +1135,7 @@ Info om R-squared på begge modellene finner vi i summary.
 anova(model1, model2)
 ```
 
-## Pakker det er verdt å nevne
+# Pakker det er verdt å nevne
 
 MBESS - Har flere nyttige funksjoner, bl.a.
 for å beregne reliabilitet og for å beregne konfidensintervaller på effektstørrelser
