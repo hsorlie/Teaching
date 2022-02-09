@@ -45,7 +45,10 @@ glrstab<- function(x, group, export=FALSE) { # input is a dataset (x) that inclu
         rownames(Rnew) <- paste(1:ncol(rndbg), varnames, sep=" ") #Row names are numbers and variable names
         colnames(Rnew) <- paste(1:ncol(rndbg), "", sep="") #Column names are just
         
-        Rnew <- cbind(round(describe(x[-a])[,3:4],2), Rnew) #describe x, M sD - put them in the matrix
+        x <- psych::describe(x[-a]) #new 
+        class(x) <- "data.frame" #new
+        
+        Rnew <- cbind(round(x[,c("mean", "sd")],2), Rnew) #describe x, M sD - put them in the matrix
         colnames(Rnew)[1:2] <- c("M","SD") #New column headers
         
         Rnew[Rnew == "NANA" | is.na(Rnew)] <- ""
